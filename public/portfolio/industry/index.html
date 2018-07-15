@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Portfolio Gallery with filtering category - Bootsnipp.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <style type="text/css">
+    .gallery-title {
+      font-size: 36px;
+      color: #42B32F;
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 70px;
+    }
+
+    .gallery-title:after {
+      content: "";
+      position: absolute;
+      width: 7.5%;
+      left: 46.5%;
+      height: 45px;
+      border-bottom: 1px solid #5e5e5e;
+    }
+
+    .filter-button {
+      font-size: 18px;
+      border: 1px solid #42B32F;
+      border-radius: 5px;
+      text-align: center;
+      color: #42B32F;
+      margin-bottom: 30px;
+
+    }
+
+    .filter-button:hover {
+      font-size: 18px;
+      border: 1px solid #42B32F;
+      border-radius: 5px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #42B32F;
+
+    }
+
+    .btn-default:active .filter-button:active {
+      background-color: #42B32F;
+      color: white;
+    }
+
+    .port-image {
+      width: 100%;
+    }
+
+    .gallery_product {
+      margin-bottom: 30px;
+    }
+
+    /* navbar text color */
+
+    .navbar-default .navbar-brand {
+      color: #fed136
+    }
+
+    @media (min-width: 768px) {
+      .navbar>.container .navbar-brand,
+      .navbar>.container-fluid .navbar-brand {
+        color: rgba(255, 255, 255, 0.7)
+      }
+    }
+  </style>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top" style="background: #212529;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          style="background-color: #fed136;" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style=";">Anten IO : Portfolios : Industry</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li>
+            <a href="../navbar/">Default</a>
+          </li> -->
+          <li class="active">
+            <a class="nav-link js-scroll-trigger" href="http://www.antenio.com#portfolios" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Feedback
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a href="../navbar-static-top/" style="color: rgba(255, 255, 255, 1.0)">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row" style="padding-top: 70px;">
+      <!-- <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h1 class="gallery-title">Gallery</h1>
+      </div> -->
+
+      <div align="center">
+        <button class="btn btn-default filter-button" data-filter="all">All</button>
+        <button class="btn btn-default filter-button" data-filter="hdpe">HDPE Pipes</button>
+        <button class="btn btn-default filter-button" data-filter="sprinkle">Sprinkle Pipes</button>
+        <button class="btn btn-default filter-button" data-filter="spray">Spray Nozzle</button>
+        <button class="btn btn-default filter-button" data-filter="irrigation">Irrigation Pipes</button>
+      </div>
+      <br/>
+
+
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Anten IO, 2018</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-facebook"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      $(".filter-button").click(function () {
+        var value = $(this).attr('data-filter');
+
+        if (value == "all") {
+          //$('.filter').removeClass('hidden');
+          $('.filter').show('1000');
+        }
+        else {
+          //            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
+          //            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
+          $(".filter").not('.' + value).hide('3000');
+          $('.filter').filter('.' + value).show('3000');
+
+        }
+      });
+
+      if ($(".filter-button").removeClass("active")) {
+        $(this).removeClass("active");
+      }
+      $(this).addClass("active");
+
+    });
+  </script>
+</body>
+
+</html>
