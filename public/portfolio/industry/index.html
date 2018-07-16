@@ -5,9 +5,13 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex, nofollow">
 
-  <title>Portfolio Gallery with filtering category - Bootsnipp.com</title>
+  <link rel="shortcut icon" type="image/png" href="/img/favicon.png" />
+
+  <title>Anten IO : Portfolios : Indsutry</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="bower_components/webix/codebase/webix.css" rel="stylesheet">
   <style type="text/css">
     .gallery-title {
       font-size: 36px;
@@ -72,12 +76,21 @@
       }
     }
   </style>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/webix/codebase/webix.js"></script>
 
 </head>
 
 <body>
+
+  <script>
+    var companies = [
+      { id: "cobham", sector: "antenna", title: "Cobham plc, Electrical and Electronic Equipment, Microwave Components and Systems", url: "http://www.cobham.com/communications-and-connectivity/electrical-and-electronic-equipment/microwave-components-and-systems/", logo: "img/cobham.svg" },
+      { id: "amphenol", sector: "antenna", title: "Enabling The Electronics Revolution | Amphenol", url: "https://www.amphenol.com/", logo: "img/amphenol.svg" },
+      { id: "huzme", sector: "antenna", title: "HUZME SAVUNMA – HUZME SAVUNMA SANAYI", url: "http://www.huzmesavunma.com/", logo: "img/huzme.png" }
+    ]
+  </script>
 
   <!-- Fixed navbar -->
   <nav class="navbar navbar-default navbar-fixed-top" style="background: #212529;">
@@ -94,29 +107,25 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <!-- <li>
-            <a href="../navbar/">Default</a>
-          </li> -->
           <li class="active">
-            <a class="nav-link js-scroll-trigger" href="http://www.antenio.com#portfolios" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Feedback
+            <a class="nav-link js-scroll-trigger" href="" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Suggest
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li>
-            <a href="../navbar-static-top/" style="color: rgba(255, 255, 255, 1.0)">Contact</a>
+          <li id="addItem" class="active" style="display: none;">
+            <a class="nav-link js-scroll-trigger" href="" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add
+              <span class="sr-only">(current)</span>
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <div class="container">
-    <div class="row" style="padding-top: 70px;">
-      <!-- <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h1 class="gallery-title">Gallery</h1>
-      </div> -->
-
+    <div id="portfolio" class="row" style="padding-top: 70px;">
       <div align="center">
         <button class="btn btn-default filter-button" data-filter="all">All</button>
+        <button class="btn btn-default filter-button" data-filter="antenna">Antenna</button>
         <button class="btn btn-default filter-button" data-filter="hdpe">HDPE Pipes</button>
         <button class="btn btn-default filter-button" data-filter="sprinkle">Sprinkle Pipes</button>
         <button class="btn btn-default filter-button" data-filter="spray">Spray Nozzle</button>
@@ -124,12 +133,42 @@
       </div>
       <br/>
 
-
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      <div id="items"></div>
+      <!-- <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter antenna">
+        <div class="thumbnail">
+          <a href="http://www.cobham.com/communications-and-connectivity/electrical-and-electronic-equipment/microwave-components-and-systems/"
+            target="_blank" rel="noopener noreferrer">
+            <img src="img/cobham.svg" alt="Lights" style="width:100%">
+            <div class="caption">
+              <p>Cobham plc, Electrical and Electronic Equipment, Microwave Components and Systems</p>
+            </div>
+          </a>
+        </div>
       </div>
-
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter antenna">
+        <div class="thumbnail">
+          <a href="https://www.amphenol.com/" target="_blank" rel="noopener noreferrer">
+            <img src="img/amphenol.svg" alt="Lights" style="width:100%">
+            <div class="caption">
+              <p>Enabling The Electronics Revolution | Amphenol</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter antenna">
+        <div class="thumbnail">
+          <a href="http://www.huzmesavunma.com/" target="_blank" rel="noopener noreferrer">
+            <img src="img/huzme.png" alt="Lights" style="width:100%">
+            <div class="caption">
+              <p>HUZME SAVUNMA – HUZME SAVUNMA SANAYI</p>
+            </div>
+          </a>
+        </div>
+      </div> -->
+      <!-- <!-- <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
+      </div> -->
+      <!-- 
       <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
         <img src="http://fakeimg.pl/365x365/" class="img-responsive">
       </div>
@@ -140,39 +179,8 @@
 
       <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
         <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
+      </div> -->
 
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
-
-      <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-        <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-      </div>
     </div>
   </div>
 
@@ -181,7 +189,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Anten IO, 2018</span>
+          <span class="copyright">Copyright &copy; Anten IO 2018</span>
         </div>
         <div class="col-md-4">
           <ul class="list-inline social-buttons">
@@ -219,6 +227,15 @@
   <script type="text/javascript">
     $(document).ready(function () {
 
+      webix.ajax().get("/user", function (t, d, x) {
+        if (d.json) {
+          if (d.json().username == "hsyn") {
+            var element = document.getElementById("addItem")
+            element.setAttribute("style", element.getAttribute("style") + "display: block;")
+          }
+        }
+      })
+
       $(".filter-button").click(function () {
         var value = $(this).attr('data-filter');
 
@@ -239,6 +256,37 @@
         $(this).removeClass("active");
       }
       $(this).addClass("active");
+
+      // load portfolio companies
+      var el = document.getElementById("items");
+      while (el.firstChild) {
+        el.removeChild(el.firstChild);
+      }
+      for (var i = 0; i < companies.length; i++) {
+        var el_div0 = document.createElement("div")
+        var el_div0_div0 = document.createElement("div")
+        var el_div0_div0_a0 = document.createElement("a")
+        var el_div0_div0_a0_img0 = document.createElement("img")
+        var el_div0_div0_a0_div0 = document.createElement("div")
+        var el_div0_div0_a0_div0_p = document.createElement("p")
+
+        el_div0_div0_a0_div0_p.innerHTML = companies[i].title
+        el_div0_div0_a0_div0.appendChild(el_div0_div0_a0_div0_p)
+        el_div0_div0_a0_div0.className = "caption"
+        el_div0_div0_a0_img0.setAttribute("src", companies[i].logo)
+        el_div0_div0_a0_img0.setAttribute("style", "width:100%;")
+        el_div0_div0_a0_img0.setAttribute("alt", companies[i].id)
+        el_div0_div0_a0.appendChild(el_div0_div0_a0_img0)
+        el_div0_div0_a0.appendChild(el_div0_div0_a0_div0)
+        el_div0_div0_a0.setAttribute("href", companies[i].url)
+        el_div0_div0_a0.setAttribute("target", "_blank")
+        el_div0_div0_a0.setAttribute("rel", "noopener noreferrer")
+        el_div0_div0.appendChild(el_div0_div0_a0)
+        el_div0_div0.className = "thumbnail"
+        el_div0.appendChild(el_div0_div0)
+        el_div0.className = "gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter " + companies[i].sector
+        el.appendChild(el_div0)
+      }
 
     });
   </script>
