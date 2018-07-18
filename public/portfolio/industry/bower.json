@@ -13,5 +13,10 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "webix": "^5.2.0",
+    "bootstrap": "3.3.0",
+    "jquery": "1.11.1"
+  }
 }

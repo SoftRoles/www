@@ -209,6 +209,7 @@
       // get user
       webix.ajax().get("/user", function (t, d, x) {
         if (d.json) {
+          console.log()
           if (d.json().username == "hsyn") {
             var element = document.getElementById("addItem")
             element.setAttribute("style", element.getAttribute("style") + "display: block;")
