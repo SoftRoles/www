@@ -133,10 +133,8 @@
       <div align="center">
         <button class="btn btn-default filter-button" data-filter="all">All</button>
         <button class="btn btn-default filter-button" data-filter="antenna">Antenna</button>
-        <button class="btn btn-default filter-button" data-filter="hdpe">HDPE Pipes</button>
-        <button class="btn btn-default filter-button" data-filter="sprinkle">Sprinkle Pipes</button>
-        <button class="btn btn-default filter-button" data-filter="spray">Spray Nozzle</button>
-        <button class="btn btn-default filter-button" data-filter="irrigation">Irrigation Pipes</button>
+        <button class="btn btn-default filter-button" data-filter="rf">RF</button>
+        <button class="btn btn-default filter-button" data-filter="mw">MW</button>
       </div>
       <br/>
 
@@ -217,12 +215,14 @@
 
       // get user
       webix.ajax().get("/user", function (t, d, x) {
-        if (d.json) {
-          console.log()
+        if (d.json()) {
+          // console.log(d.json())
           if (d.json().username == "hsyn") {
             var element = document.getElementById("addItem")
             element.setAttribute("style", element.getAttribute("style") + "display: block;")
           }
+        } else {
+          webix.send("/login?source=portfolio/industry/index.html", { username: "guest", password: "guest" })
         }
       })
 
@@ -253,37 +253,50 @@
       while (el.firstChild) {
         el.removeChild(el.firstChild);
       }
-      for (var i = 0; i < companies.length; i++) {
-        var el_div0 = document.createElement("div")
-        var el_div0_div0 = document.createElement("div")
-        var el_div0_div0_a0 = document.createElement("a")
-        var el_div0_div0_a0_img0 = document.createElement("img")
-        var el_div0_div0_a0_div0 = document.createElement("div")
-        var el_div0_div0_a0_div0_p = document.createElement("p")
 
-        el_div0_div0_a0_div0_p.innerHTML = companies[i].title
-        el_div0_div0_a0_div0.appendChild(el_div0_div0_a0_div0_p)
-        el_div0_div0_a0_div0.className = "caption"
-        el_div0_div0_a0_img0.setAttribute("src", companies[i].logo)
-        el_div0_div0_a0_img0.setAttribute("style", "width:100%;")
-        el_div0_div0_a0_img0.setAttribute("alt", companies[i].id)
-        el_div0_div0_a0.appendChild(el_div0_div0_a0_img0)
-        el_div0_div0_a0.appendChild(el_div0_div0_a0_div0)
-        el_div0_div0_a0.setAttribute("href", companies[i].url)
-        el_div0_div0_a0.setAttribute("target", "_blank")
-        el_div0_div0_a0.setAttribute("rel", "noopener noreferrer")
-        el_div0_div0.appendChild(el_div0_div0_a0)
-        el_div0_div0.className = "thumbnail"
-        el_div0.appendChild(el_div0_div0)
-        el_div0.className = "gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter " + companies[i].sector
-        el.appendChild(el_div0)
-      }
+      webix.ajax().get("/mongodb/api/favorites/links", function (t, d, x) {
+        // console.log(d.json())
+        var companies = d.json()
+        for (var i = 0; i < companies.length; i++) {
+          if (companies[i].portfolio) {
+            if (companies[i].portfolio == "industry") {
+              // console.log(companies[i].category)
+              var el_div0 = document.createElement("div")
+              var el_div0_div0 = document.createElement("div")
+              var el_div0_div0_a0 = document.createElement("a")
+              var el_div0_div0_a0_img0 = document.createElement("img")
+              var el_div0_div0_a0_div0 = document.createElement("div")
+              var el_div0_div0_a0_div0_p = document.createElement("p")
+
+              el_div0_div0_a0_div0_p.innerHTML = companies[i].title
+              el_div0_div0_a0_div0.appendChild(el_div0_div0_a0_div0_p)
+              el_div0_div0_a0_div0.className = "caption"
+              el_div0_div0_a0_img0.setAttribute("src", "/filesystem/api/files/" + companies[i].logo)
+              el_div0_div0_a0_img0.setAttribute("style", "width:100%;")
+              el_div0_div0_a0_img0.setAttribute("alt", companies[i].meta)
+              el_div0_div0_a0.appendChild(el_div0_div0_a0_img0)
+              el_div0_div0_a0.appendChild(el_div0_div0_a0_div0)
+              el_div0_div0_a0.setAttribute("href", companies[i].url)
+              el_div0_div0_a0.setAttribute("target", "_blank")
+              el_div0_div0_a0.setAttribute("rel", "noopener noreferrer")
+              el_div0_div0.appendChild(el_div0_div0_a0)
+              el_div0_div0.className = "thumbnail"
+              el_div0.appendChild(el_div0_div0)
+              el_div0.className = "gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter " + companies[i].category.replace(",", "")
+              el.appendChild(el_div0)
+            }
+          }
+        }
+      })
+
 
       // add item menu
       function mark_portfolio(obj) {
+        console.log(obj)
         if (obj.portfolio) {
           if (obj.portfolio == "industry") return "<span style='color:#3c763d; font-weight:bold'>&#10003;</span>"
         }
+        return ""
       }
 
       webix.ready(function () {
@@ -308,7 +321,7 @@
                 url: "/mongodb/api/favorites/links",
                 view: "datatable", select: "row",
                 columns: [
-                  { id: "portfolio", header: "", cssFormat: mark_portfolio, template: mark_portfolio, fillspace: 1 },
+                  { id: "portfolio", header: "", template: mark_portfolio, fillspace: 1 },
                   { id: "category", header: ["Category", { content: "textFilter", contentId: "categoryHead"/*, options: categoryOptions*/ }], editor: "text", fillspace: 4 },
                   { id: "title", header: ["Title", { content: "textFilter", contentId: "titleHead" }], editor: "text", fillspace: 11 },
                   { id: "url", header: ["URL", { content: "textFilter", contentId: "urlHead" }], template: "<a href='javascript:linkClick()'>#url#</a>", editor: "text", fillspace: 11 },
