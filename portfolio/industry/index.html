@@ -149,8 +149,8 @@
             </div>
           </a>
         </div>
-      </div>
-      <!-- <!-- <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
+      </div>-->
+      <!-- <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
         <img src="http://fakeimg.pl/365x365/" class="img-responsive">
       </div> -->
 
@@ -215,13 +215,13 @@
 
       // get user
       webix.ajax().get("/user", function (t, d, x) {
-        if (d.json()) {
-          // console.log(d.json())
+        if (d.json().username) {
           if (d.json().username == "hsyn") {
             var element = document.getElementById("addItem")
             element.setAttribute("style", element.getAttribute("style") + "display: block;")
           }
-        } else {
+        }
+        else{
           webix.send("/login?source=portfolio/industry/index.html", { username: "guest", password: "guest" })
         }
       })
