@@ -254,6 +254,19 @@
       var target = this;
       return target.replace(new RegExp(search, 'g'), replacement);
     };
+    Array.prototype.shuffle = function () {
+      var input = this;
+
+      for (var i = input.length - 1; i >= 0; i--) {
+
+        var randomIndex = Math.floor(Math.random() * (i + 1));
+        var itemAtIndex = input[randomIndex];
+
+        input[randomIndex] = input[i];
+        input[i] = itemAtIndex;
+      }
+      return input;
+    }
 
     // add item menu
     function mark_portfolio(obj) {
@@ -311,6 +324,7 @@
 
       webix.ajax().get("/mongodb/api/favorites/links?portfolio=industry", function (t, d, x) {
         var companies = d.json()
+        companies.shuffle()
         for (var i = 0; i < companies.length; i++) {
 
           var el_div0 = document.createElement("div")
