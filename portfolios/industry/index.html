@@ -177,10 +177,10 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active">
-            <a class="nav-link js-scroll-trigger" href="" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Suggest
+          <!-- <li class="active">
+            <a id="suggest" class="nav-link js-scroll-trigger" href="" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Suggest
             </a>
-          </li>
+          </li> -->
           <li id="addItem" class="active" style="display: none;">
             <a class="nav-link js-scroll-trigger" onclick="openaddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add
             </a>
@@ -283,7 +283,9 @@
     }
 
     $(document).ready(function () {
-
+      // var element = document.getElementById("suggest")
+      // element.setAttribute("style", element.getAttribute("style") + "display: none;")
+      
       // get user
       webix.ajax().get("/user", function (t, d, x) {
         if (d.json().username) {
