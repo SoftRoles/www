@@ -177,10 +177,10 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <!-- <li class="active">
-            <a id="suggest" class="nav-link js-scroll-trigger" href="" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Suggest
+          <li class="active">
+            <a id="suggest" class="nav-link js-scroll-trigger" onclick="openSuggestWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Suggest
             </a>
-          </li> -->
+          </li>
           <li id="addItem" class="active" style="display: none;">
             <a class="nav-link js-scroll-trigger" onclick="openaddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add
             </a>
@@ -449,6 +449,45 @@
     });
     function openaddItemWin() {
       $$("addItemWin").show()
+    }
+
+    // Suggest window
+    webix.ready(function () {
+      webix.ui({
+        view: "window",
+        id: "suggestWin",
+        height: window.innerHeight * 0.5,
+        width: window.innerWidth * 0.5,
+        modal: true,
+        position: "center",
+        headHeight: 0,
+        on: {
+          "onShow": function () {
+            // document.getElementsByClassName("webix_hidden_upload")[0].style.display = "none";
+          }
+        },
+        body:
+        {
+          rows: [
+            { id: "suggestMessage", view: "textarea", label: "Message", labelPosition: "top", placeholder: "Suggest any idea, url, company name etc..." },
+            {
+              cols: [
+                { id: "closeSuggestWin", view: "button", type: "danger", label: "Close", click: function () { $$("suggestWin").hide() } },
+                {
+                  id: "suggestItem", view: "button", label: "Send", click: function () {
+                    webix.ajax().header({ "Content-type": "application/json" }).post("/mongodb/api/favorites/suggest", { "message": $$("suggestMessage").getValue() }, function (t, d, x) {
+                      console.log(d.json())
+                    })
+                  }
+                },
+              ]
+            },
+          ],
+        }
+      })
+    });
+    function openSuggestWin() {
+      $$("suggestWin").show()
     }
   </script>
 
