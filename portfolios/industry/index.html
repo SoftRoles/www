@@ -285,7 +285,7 @@
     $(document).ready(function () {
       // var element = document.getElementById("suggest")
       // element.setAttribute("style", element.getAttribute("style") + "display: none;")
-      
+
       // get user
       webix.ajax().get("/user", function (t, d, x) {
         if (d.json().username) {
@@ -451,6 +451,17 @@
       $$("addItemWin").show()
     }
   </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126752612-1');
+  </script>
+
 </body>
 
 </html>
