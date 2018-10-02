@@ -480,6 +480,7 @@
                   id: "suggestItem", view: "button", label: "Send", click: function () {
                     webix.ajax().header({ "Content-type": "application/json" }).post("/mongodb/api/favorites/suggest", { "message": $$("suggestMessage").getValue() }, function (t, d, x) {
                       console.log(d.json())
+                 $$("suggestWin").close() 
                     })
                   }
                 },
