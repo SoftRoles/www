@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Anten IO : Portfolios : Equations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+
+  <script src="/jquery/dist/jquery.js"></script>
+  <script src="/bootstrap/dist/js/bootstrap.js"></script>
+
+  <style>
+    /* navbar text color */
+    .navbar .navbar-brand {
+      color: #fed136
+    }
+    a {
+      color: #fed136
+    }
+  
+    @media (min-width: 768px) {
+      .navbar> .navbar-brand {
+        color: rgba(255, 255, 255, 0.7)
+      }
+      a {
+        color:  rgba(255, 255, 255, 0.7);
+      }
+    }
+    .navbar-brand {
+      font-size: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .navbar-brand {
+        font-size: 18px;
+      }
+    }
+
+    /* navlink */
+    .nav-link {
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .nav-link {
+        font-size: 16px;
+      }
+    }
+
+    /* navbar toggler */
+    .navbar .navbar-toggler{
+      border-color: #ddd;
+    }
+
+    .navbar-toggler{
+      background-color: #fed136;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+
+    .navbar-toggler-icon {
+      height: 1em;
+      width: 1em;
+    }
+
+    .navbar-dark .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#888' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    } 
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-expand-sm" style="background-color: #212529;">
+    <div class="navbar-brand"><a href="/">Anten IO ></a> <a href="/">Portfolios ></a><a href="/">Equations</a></div>
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-0">
+        <li class="active">
+          <a id="feedback" class="nav-link" onclick="openSuggestWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Feedback
+          </a>
+        </li>
+        <li id="add" class="active" style="display: none;">
+          <a class="nav-link" onclick="openaddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
+
+</body>
+
+</html>
