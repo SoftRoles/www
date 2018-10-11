@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/katex/dist/katex.css">
 
   <script src="/jquery/dist/jquery.js"></script>
+  <script src="/popper.js/dist/umd/popper.js"></script>
   <script src="/bootstrap/dist/js/bootstrap.js"></script>
   <script src="/katex/dist/katex.js"></script>
 
@@ -162,23 +163,51 @@
   </footer>
 
   <script>
-  var el = document.createElement("div")
-  var el_div0 = document.createElement("div")
-  var el_div1 = document.createElement("div")
-  var el_div1_h0 = document.createElement("h5")
+    var el = document.createElement("div")
+    var el_div0 = document.createElement("div")
+    var el_div1 = document.createElement("div")
+    var el_div1_div0 = document.createElement("div")
+    var el_div1_div1 = document.createElement("div")
+    var el_h0 = document.createElement("h5")
 
-  el.className = "card mx-1 my-1"
-  el_div0.className = "d-flex justify-content-center"
-  el_div1.className = "card-body"
-  el_div1_h0.className = "card-title"
+    el.className = "card mx-1 my-1"
+    el_div0.className = "d-flex justify-content-center"
+    el_div1.className = "card-body row d-flex justify-content-center"
+    el_h0.className = "card-title"
 
-  el_div0.innerHTML = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}", {throwOnError: false});
-  el_div1_h0.innerHTML = "An equation"
+    el_div1_div0.setAttribute("tabindex", 0)
+    el_div1_div0.setAttribute("data-toggle", "popover")
+    el_div1_div0.setAttribute("data-placement", "bottom")
+    el_div1_div0.setAttribute("data-html", "true")
+    el_div1_div0.setAttribute("data-trigger", "focus")
+    el_div1_div0.setAttribute("title", "Popover title")
+    el_div1_div0.setAttribute("data-content", "<div>Popover 1</div>")
 
-  el_div1.appendChild(el_div1_h0)
-  el.appendChild(el_div0)
-  el.appendChild(el_div1)
-  document.querySelector(".card-columns").appendChild(el)
+    el_div1_div1.setAttribute("tabindex", 0)
+    el_div1_div1.setAttribute("data-toggle", "popover")
+    el_div1_div1.setAttribute("data-placement", "bottom")
+    el_div1_div1.setAttribute("data-html", "true")
+    el_div1_div1.setAttribute("data-trigger", "focus")
+    el_div1_div1.setAttribute("title", "Popover title")
+    el_div1_div1.setAttribute("data-content", "<div>Pop2over </div>")
+
+    el_div1_div0.innerHTML = katex.renderToString("c = ", { throwOnError: false });
+    el_div1_div1.innerHTML = katex.renderToString("\\pm\\sqrt{a^2 + b^2}", { throwOnError: false });
+    el_h0.innerHTML = "An equation"
+
+    el_div1.appendChild(el_div1_div0)
+    el_div1.appendChild(el_div1_div1)
+    el.appendChild(el_div0)
+    el.appendChild(el_div1)
+    el.appendChild(el_h0)
+    document.querySelector(".card-columns").appendChild(el)
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    })
   </script>
 
 </body>
