@@ -105,6 +105,15 @@
       background-image: -ms-linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
       background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0.02, white), color-stop(0.5, lightgreen), color-stop(0.98, white));
     }
+
+    /* card */
+    .card-title {
+      font-size: 1.1rem;
+    }
+
+    .popover {
+      max-width: 200%;
+    }
   </style>
 </head>
 
@@ -134,7 +143,7 @@
     <div class="row  justify-content-center" style="padding-top: 70px;">
       <button class="btn btn-outline-success m-1 active" data-filter="all">All</button>
       <button class="btn btn-outline-success m-1" data-filter="em">Electromagnetic</button>
-      <button class="btn btn-outline-success m-1" data-filter="rf">Antenna</button>
+      <button class="btn btn-outline-success m-1" data-filter="antenna">Antenna</button>
       <button class="btn btn-outline-success m-1" data-filter="microwave">Propagation</button>
     </div>
   </div>
@@ -143,16 +152,7 @@
   <div class="fade_rule"></div>
   <br><br>
 
-  <div class="card-columns" style="margin-bottom: 70px;">
-    <div class="card mx-1 my-1">
-      <img class="card-img-top" src="" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title that wraps to a new line</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
+  <div class="card-columns" style="margin-bottom: 70px;"></div>
 
   <!-- Footer -->
   <footer class="footer fixed-bottom w-100">
@@ -163,51 +163,90 @@
   </footer>
 
   <script>
-    var el = document.createElement("div")
-    var el_div0 = document.createElement("div")
-    var el_div1 = document.createElement("div")
-    var el_div1_div0 = document.createElement("div")
-    var el_div1_div1 = document.createElement("div")
-    var el_h0 = document.createElement("h5")
+    var equations = [
+      {
+        category: "em", title: "Pythogoras",
+        definition: "test formula",
+        formula: "c = \\pm\\sqrt{a^2 + b^2} \\quad \\text{[unit]}",
+        args: [
+          "\\bm{a}&: \\textit{first variable}",
+          "\\bm{b}&: \\textit{second variable}"
+        ]
+      },
+      {
+        category: "antenna", title: "Parabolic antenna gain",
+        definition: "Approximate gian in dB",
+        formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\text{[unit]}",
+        args: [
+          "\\bm{k}&: \\textit{is the efficiency factor [0.5 - 0.6]}",
+          "\\bm{D}&: \\textit{diameter of the parabolic reflector [m]}",
+          "\\bm{\\lambda}&: \\textit{wavelength of the signal [m]}"
+        ]
+      }
 
-    el.className = "card mx-1 my-1"
-    el_div0.className = "d-flex justify-content-center"
-    el_div1.className = "card-body row d-flex justify-content-center"
-    el_h0.className = "card-title"
+    ]
 
-    el_div1_div0.setAttribute("tabindex", 0)
-    el_div1_div0.setAttribute("data-toggle", "popover")
-    el_div1_div0.setAttribute("data-placement", "bottom")
-    el_div1_div0.setAttribute("data-html", "true")
-    el_div1_div0.setAttribute("data-trigger", "focus")
-    el_div1_div0.setAttribute("title", "Popover title")
-    el_div1_div0.setAttribute("data-content", "<div>Popover 1</div>")
+    equations.forEach(function (equation) {
+      var el = document.createElement("div")
+      var el_div0 = document.createElement("div")
+      var el_div1 = document.createElement("div")
+      var el_div1_h0 = document.createElement("h5")
+      var el_div1_p0 = document.createElement("p")
 
-    el_div1_div1.setAttribute("tabindex", 0)
-    el_div1_div1.setAttribute("data-toggle", "popover")
-    el_div1_div1.setAttribute("data-placement", "bottom")
-    el_div1_div1.setAttribute("data-html", "true")
-    el_div1_div1.setAttribute("data-trigger", "focus")
-    el_div1_div1.setAttribute("title", "Popover title")
-    el_div1_div1.setAttribute("data-content", "<div>Pop2over </div>")
+      el.className = "card mx-1 my-1 " + equation.category
+      el_div1.className = "card-body p-0 pl-2"
+      el_div1_h0.className = "card-title"
 
-    el_div1_div0.innerHTML = katex.renderToString("c = ", { throwOnError: false });
-    el_div1_div1.innerHTML = katex.renderToString("\\pm\\sqrt{a^2 + b^2}", { throwOnError: false });
-    el_h0.innerHTML = "An equation"
+      var popover = "\\begin{aligned}"
+      equation.args.forEach(function (arg) {
+        popover += arg + "\\\\"
+      })
+      popover += "\\end{aligned}"
 
-    el_div1.appendChild(el_div1_div0)
-    el_div1.appendChild(el_div1_div1)
-    el.appendChild(el_div0)
-    el.appendChild(el_div1)
-    el.appendChild(el_h0)
-    document.querySelector(".card-columns").appendChild(el)
+      el_div0.setAttribute("tabindex", 0)
+      el_div0.setAttribute("data-toggle", "popover")
+      el_div0.setAttribute("data-content", katex.renderToString(popover))
+
+      el_div0.innerHTML = katex.renderToString(equation.formula, { displayMode: true, throwOnError: false });
+      el_div1_h0.innerHTML = equation.title
+      el_div1_p0.innerHTML = equation.definition
+
+      el_div1.appendChild(el_div1_h0)
+      el_div1.appendChild(el_div1_p0)
+      el.appendChild(el_div0)
+      el.appendChild(el_div1)
+      document.querySelector(".card-columns").appendChild(el)
+    })
 
     $(function () {
-      $('[data-toggle="popover"]').popover()
+      $('[data-toggle="popover"]').popover(
+        {
+          html: true,
+          trigger: "focus",
+          placement: "bottom",
+        }
+      )
+
+      $('.popover-dismiss').popover({
+        trigger: 'focus',
+      })
+
+      $(".btn-outline-success").click(function () {
+        var value = $(this).attr('data-filter');
+        if (value == "all") {
+          $('.card').show('1000');
+        }
+        else {
+          $(".card").not('.' + value).hide('3000');
+          $('.card').filter('.' + value).show('3000');
+        }
+
+        $(".btn-outline-success").removeClass("active")
+        $(this).addClass("active");
+      });
     })
-    $('.popover-dismiss').popover({
-      trigger: 'focus'
-    })
+
+
   </script>
 
 </body>
