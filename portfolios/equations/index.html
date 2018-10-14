@@ -14,6 +14,7 @@
   <script src="/popper.js/dist/umd/popper.js"></script>
   <script src="/bootstrap/dist/js/bootstrap.js"></script>
   <script src="/katex/dist/katex.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.0/math.js"></script>
 
   <style>
     /* navbar text color */
@@ -120,7 +121,7 @@
 <body>
   <!-- Header -->
   <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;">
-    <div class="navbar-brand"><a href="/">Anten IO</a> > <a href="/#portfolio">Portfolios</a> > <a href="/portfolios/equations/index.html">Equations</a></div>
+    <div class="navbar-brand"><a href="/">Anten IO</a> : <a href="/#portfolio">Portfolios</a> : <a href="/portfolios/equations/index.html">Equations</a></div>
     <!-- <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -171,7 +172,8 @@
         args: [
           "\\bm{a}&: \\textit{first variable}",
           "\\bm{b}&: \\textit{second variable}"
-        ]
+        ],
+        calc:""
       },
       {
         category: "antenna", title: "Parabolic antenna gain",
@@ -191,7 +193,7 @@
       var el_div0 = document.createElement("div")
       var el_div1 = document.createElement("div")
       var el_div1_h0 = document.createElement("h5")
-      var el_div1_p0 = document.createElement("p")
+      if (!!equation.definition) { var el_div1_p0 = document.createElement("p") }
 
       el.className = "card mx-1 my-1 " + equation.category
       el_div1.className = "card-body p-0 pl-2"
@@ -209,10 +211,10 @@
 
       el_div0.innerHTML = katex.renderToString(equation.formula, { displayMode: true, throwOnError: false });
       el_div1_h0.innerHTML = equation.title
-      el_div1_p0.innerHTML = equation.definition
+      if (!!equation.definition) el_div1_p0.innerHTML = equation.definition
 
       el_div1.appendChild(el_div1_h0)
-      el_div1.appendChild(el_div1_p0)
+      if (!!equation.definition) el_div1.appendChild(el_div1_p0)
       el.appendChild(el_div0)
       el.appendChild(el_div1)
       document.querySelector(".card-columns").appendChild(el)
