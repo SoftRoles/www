@@ -151,7 +151,9 @@
 
   <br>
   <div class="fade_rule"></div>
-  <br><br>
+  <br>
+  <p style="text-align: center; font-style: italic; font-size: 80%;">(Click or touch equation to see argument definitions)</p>
+  <br>
 
   <div class="card-columns" style="margin-bottom: 70px;"></div>
 
@@ -172,18 +174,21 @@
         args: [
           "\\bm{a}&: \\textit{first variable}",
           "\\bm{b}&: \\textit{second variable}"
-        ],
-        calc:""
+        ]
       },
       {
         category: "antenna", title: "Parabolic antenna gain",
-        definition: "Approximate gian in dB",
-        formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\text{[unit]}",
+        definition: "Approximate gain in dB",
+        formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\quad \\text{[dB]}",
         args: [
           "\\bm{k}&: \\textit{is the efficiency factor [0.5 - 0.6]}",
           "\\bm{D}&: \\textit{diameter of the parabolic reflector [m]}",
           "\\bm{\\lambda}&: \\textit{wavelength of the signal [m]}"
-        ]
+        ],
+        calc: {
+          args: ["k", "D", "lambda"],
+          formula: "10*log10(k*pi*D/lambda)"
+        }
       }
 
     ]
