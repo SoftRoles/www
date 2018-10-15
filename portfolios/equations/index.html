@@ -115,6 +115,17 @@
     .popover {
       max-width: 200%;
     }
+
+    /* form */
+    .col-form-label{
+      width: 30px;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .form-group{
+      margin-bottom: 0.5rem;
+    }
   </style>
 </head>
 
@@ -152,7 +163,8 @@
   <br>
   <div class="fade_rule"></div>
   <br>
-  <p style="text-align: center; font-style: italic; font-size: 80%;">(Click or touch equation to see argument definitions)</p>
+  <p style="text-align: center; font-style: italic; font-size: 80%;">(Click or touch equation to see argument
+    definitions)</p>
   <br>
 
   <div class="card-columns" style="margin-bottom: 70px;"></div>
@@ -164,6 +176,31 @@
       <a id="feedback" onclick="openSuggestWin()">Feedback</a>
     </div>
   </footer>
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form>
+            <div class="form-group row">
+              <label for="input" class="col-form-label col-form-label-sm text-right mr-2">k :</label>
+              <div class="flex-fill mr-1">
+                <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <script>
     var equations = [
@@ -186,11 +223,14 @@
           "\\bm{\\lambda}&: \\textit{wavelength of the signal [m]}"
         ],
         calc: {
-          args: ["k", "D", "lambda"],
+          args: [
+            { id: "k", default: 1 },
+            { id: "D", default: 5 },
+            { id: "lambda", default: 6.125 }
+          ],
           formula: "10*log10(k*pi*D/lambda)"
         }
       }
-
     ]
 
     equations.forEach(function (equation) {
@@ -198,13 +238,14 @@
       var el_div0 = document.createElement("div")
       var el_div1 = document.createElement("div")
       var el_div1_h0 = document.createElement("h5")
+      var el_div1_div0 = document.createElement("div")
       if (!!equation.definition) { var el_div1_p0 = document.createElement("p") }
       if (!!equation.calc) { var el_div1_button0 = document.createElement("button") }
 
-      el.className = "card mx-1 my-1 " + equation.category
-      el_div1.className = "card-body p-0 pl-2"
+      el.className = "card mx-1 my-1 text-center " + equation.category
+      el_div1.className = "card-body p-2"
       el_div1_h0.className = "card-title"
-      if (!!equation.calc) el_div1_button0.classList = "btn btn-primary" 
+      if (!!equation.calc) el_div1_button0.classList = "btn btn-secondary"
 
       var popover = "\\begin{aligned}"
       equation.args.forEach(function (arg) {
@@ -215,10 +256,13 @@
       el_div0.setAttribute("tabindex", 0)
       el_div0.setAttribute("data-toggle", "popover")
       el_div0.setAttribute("data-content", katex.renderToString(popover))
+      if (!!equation.calc) el_div1_button0.setAttribute("data-toggle", "modal")
+      if (!!equation.calc) el_div1_button0.setAttribute("data-target", ".modal")
 
       el_div0.innerHTML = katex.renderToString(equation.formula, { displayMode: true, throwOnError: false });
       el_div1_h0.innerHTML = equation.title
       if (!!equation.definition) el_div1_p0.innerHTML = equation.definition
+      if (!!equation.calc) el_div1_button0.innerHTML = "Calculate"
 
       el_div1.appendChild(el_div1_h0)
       if (!!equation.definition) el_div1.appendChild(el_div1_p0)
@@ -254,6 +298,40 @@
         $(".btn-outline-success").removeClass("active")
         $(this).addClass("active");
       });
+
+      // modal
+      $('.modal').on('shown.bs.modal', function (e) {
+        var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
+        var equation = equations.filter(function(item){ return item.title == title})[0]
+        // console.log(equation)
+        var el = document.querySelector("form")
+        while (el.firstChild) {
+          el.removeChild(el.firstChild);
+        }
+        equation.calc.args.forEach(function(item){
+          console.log(item)
+          var el_div0 = document.createElement("div")
+          var el_div0_label0 = document.createElement("label")
+          var el_div0_div0 = document.createElement("div")
+          var el_div0_div0_input0 = document.createElement("input")
+  
+          el_div0.className = "form-group row"
+          el_div0_label0.className = "col-form-label col-form-label-sm text-right mr-2"
+          el_div0_div0.className = "flex-fill mr-1"
+          el_div0_div0_input0.className = "form-control form-control-sm"
+  
+          el_div0_label0.setAttribute("for", "input"+item.id)
+          el_div0_div0_input0.setAttribute("type","text")
+          el_div0_div0_input0.setAttribute("value",item.default)
+  
+          el_div0_label0.innerHTML = item.id + ":"
+  
+          el_div0_div0.appendChild(el_div0_div0_input0)
+          el_div0.appendChild(el_div0_label0)
+          el_div0.appendChild(el_div0_div0)
+          el.appendChild(el_div0)
+        })
+      })
     })
 
 
