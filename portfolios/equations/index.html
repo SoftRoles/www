@@ -199,10 +199,12 @@
       var el_div1 = document.createElement("div")
       var el_div1_h0 = document.createElement("h5")
       if (!!equation.definition) { var el_div1_p0 = document.createElement("p") }
+      if (!!equation.calc) { var el_div1_button0 = document.createElement("button") }
 
       el.className = "card mx-1 my-1 " + equation.category
       el_div1.className = "card-body p-0 pl-2"
       el_div1_h0.className = "card-title"
+      if (!!equation.calc) el_div1_button0.classList = "btn btn-primary" 
 
       var popover = "\\begin{aligned}"
       equation.args.forEach(function (arg) {
@@ -220,6 +222,7 @@
 
       el_div1.appendChild(el_div1_h0)
       if (!!equation.definition) el_div1.appendChild(el_div1_p0)
+      if (!!equation.calc) el_div1.appendChild(el_div1_button0)
       el.appendChild(el_div0)
       el.appendChild(el_div1)
       document.querySelector(".card-columns").appendChild(el)
