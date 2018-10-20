@@ -15,6 +15,7 @@
   <script src="/bootstrap/dist/js/bootstrap.js"></script>
   <script src="/katex/dist/katex.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.0/math.js"></script>
+  <script defer src="js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
   <style>
     /* navbar text color */
@@ -117,12 +118,6 @@
     }
 
     /* form */
-    .col-form-label{
-      width: 30px;
-      font-style: italic;
-      font-weight: bold;
-    }
-
     .form-group{
       margin-bottom: 0.5rem;
     }
@@ -200,77 +195,90 @@
     </div>
   </div>
 
-
+  <script>
+    const renderMath = function () {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: "$$", right: "$$", display: true },
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true }
+        ]
+      });
+    }
+  </script>
 
   <script>
+
+
     var equations = [
       {
         category: "em", title: "Pythogoras",
         definition: "test formula",
         formula: "c = \\pm\\sqrt{a^2 + b^2} \\quad \\text{[unit]}",
         args: [
-          "\\bm{a}&: \\textit{first variable}",
-          "\\bm{b}&: \\textit{second variable}"
-        ]
-      },
-      {
-        category: "antenna", title: "Parabolic antenna gain",
-        definition: "Approximate gain in dB",
-        formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\quad \\text{[dB]}",
-        args: [
-          "\\bm{k}&: \\textit{is the efficiency factor [0.5 - 0.6]}",
-          "\\bm{D}&: \\textit{diameter of the parabolic reflector [m]}",
-          "\\bm{\\lambda}&: \\textit{wavelength of the signal [m]}"
+          { id: "a", sym: "\\bm{a}", def: "\\textit{first variable}" },
+          { id: "b", sym: "\\bm{b}", def: "\\textit{second variable}" }
         ],
         calc: {
-          args: [
-            { id: "k", default: 1 },
-            { id: "D", default: 5 },
-            { id: "lambda", default: 6.125 }
-          ],
-          formula: "10*log10(k*pi*D/lambda)"
+          labelwidth: "30px",
+          vars: {"a":1, "b":2},
+          eval: "a+b"
         }
-      }
+      },
+      // {
+      //   category: "antenna", title: "Parabolic antenna gain",
+      //   definition: "Approximate gain in dB",
+      //   formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\quad \\text{[dB]}",
+      //   args: [
+      //     "\\bm{k}&: \\textit{is the efficiency factor [0.5 - 0.6]}",
+      //     "\\bm{D}&: \\textit{diameter of the parabolic reflector [m]}",
+      //     "\\bm{\\lambda}&: \\textit{wavelength of the signal [m]}"
+      //   ],
+      //   calc: {
+      //     args: [
+      //       { id: "k", default: 1 },
+      //       { id: "D", default: 5 },
+      //       { id: "$\\bm{\\lambda}$", default: 6.125 }
+      //     ],
+      //     formula: "10*log10(k*pi*D/lambda)"
+      //   }
+      // }
     ]
 
     equations.forEach(function (equation) {
-      var el = document.createElement("div")
-      var el_div0 = document.createElement("div")
-      var el_div1 = document.createElement("div")
-      var el_div1_h0 = document.createElement("h5")
-      var el_div1_div0 = document.createElement("div")
-      if (!!equation.definition) { var el_div1_p0 = document.createElement("p") }
-      if (!!equation.calc) { var el_div1_button0 = document.createElement("button") }
-
-      el.className = "card mx-1 my-1 text-center " + equation.category
-      el_div1.className = "card-body p-2"
-      el_div1_h0.className = "card-title"
-      if (!!equation.calc) el_div1_button0.classList = "btn btn-secondary"
+      var el = $("<div />", { class: equation.category });
 
       var popover = "\\begin{aligned}"
       equation.args.forEach(function (arg) {
-        popover += arg + "\\\\"
+        popover += arg.sym + "&" + arg.def + "\\\\"
       })
       popover += "\\end{aligned}"
+      var el_div0 = $("<div />", {
+        "data-content": katex.renderToString(popover),
+        html: katex.renderToString(equation.formula, { displayMode: true, throwOnError: false })
+      })
+      var el_div1 = $("<div />")
+      var el_div1_h0 = $("<h5 />", { html: equation.title })
+      if (!!equation.definition) { var el_div1_p0 = $("<p />", { html: equation.definition }) }
+      if (!!equation.calc) { var el_div1_button0 = $("<button />") }
 
-      el_div0.setAttribute("tabindex", 0)
-      el_div0.setAttribute("data-toggle", "popover")
-      el_div0.setAttribute("data-content", katex.renderToString(popover))
-      if (!!equation.calc) el_div1_button0.setAttribute("data-toggle", "modal")
-      if (!!equation.calc) el_div1_button0.setAttribute("data-target", ".modal")
-
-      el_div0.innerHTML = katex.renderToString(equation.formula, { displayMode: true, throwOnError: false });
-      el_div1_h0.innerHTML = equation.title
-      if (!!equation.definition) el_div1_p0.innerHTML = equation.definition
-      if (!!equation.calc) el_div1_button0.innerHTML = "Calculate"
-
-      el_div1.appendChild(el_div1_h0)
-      if (!!equation.definition) el_div1.appendChild(el_div1_p0)
-      if (!!equation.calc) el_div1.appendChild(el_div1_button0)
-      el.appendChild(el_div0)
-      el.appendChild(el_div1)
-      document.querySelector(".card-columns").appendChild(el)
+      el_div1.append(el_div1_h0)
+      if (!!equation.definition) el_div1.append(el_div1_p0)
+      if (!!equation.calc) el_div1.append(el_div1_button0)
+      el.append(el_div0)
+      el.append(el_div1)
+      el.appendTo($(".card-columns"))
     })
+    $(".card-columns > div").addClass("card mx-1 my-1 text-center")
+    $(".card-columns > .card > div:even").attr("tabIndex", 0)
+    $(".card-columns > .card > div:even").attr("data-toggle", "popover")
+    $(".card-columns > .card > div:odd").addClass("card-body p-2")
+    $(".card-columns > .card > div > h5").addClass("card-title")
+    $(".card-columns > .card > div > button").addClass("btn btn-secondary")
+    $(".card-columns > .card > div > button").attr("data-toggle", "modal")
+    $(".card-columns > .card > div > button").attr("data-target", ".modal")
+    $(".card-columns > .card > div > button").text("Calculate")
 
     $(function () {
       $('[data-toggle="popover"]').popover(
@@ -302,35 +310,30 @@
       // modal
       $('.modal').on('shown.bs.modal', function (e) {
         var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
-        var equation = equations.filter(function(item){ return item.title == title})[0]
-        // console.log(equation)
-        var el = document.querySelector("form")
-        while (el.firstChild) {
-          el.removeChild(el.firstChild);
-        }
-        equation.calc.args.forEach(function(item){
-          console.log(item)
-          var el_div0 = document.createElement("div")
-          var el_div0_label0 = document.createElement("label")
-          var el_div0_div0 = document.createElement("div")
-          var el_div0_div0_input0 = document.createElement("input")
-  
-          el_div0.className = "form-group row"
-          el_div0_label0.className = "col-form-label col-form-label-sm text-right mr-2"
-          el_div0_div0.className = "flex-fill mr-1"
-          el_div0_div0_input0.className = "form-control form-control-sm"
-  
-          el_div0_label0.setAttribute("for", "input"+item.id)
-          el_div0_div0_input0.setAttribute("type","text")
-          el_div0_div0_input0.setAttribute("value",item.default)
-  
-          el_div0_label0.innerHTML = item.id + ":"
-  
-          el_div0_div0.appendChild(el_div0_div0_input0)
-          el_div0.appendChild(el_div0_label0)
-          el_div0.appendChild(el_div0_div0)
-          el.appendChild(el_div0)
+        var equation = equations.filter(function (item) { return item.title == title })[0]
+        $("form").empty()
+        $.each(equation.calc.vars, (key, value) => {
+          var el_div0 = $("<div />")
+          var el_div0_label0 = $("<label />")
+          el_div0_label0.text(key + ":")
+          var el_div0_div0 = $("<div />")
+          var el_div0_div0_input0 = $("<input />")
+          el_div0_div0_input0.attr("value", value)
+
+
+          el_div0_div0.append(el_div0_div0_input0)
+          el_div0.append(el_div0_label0)
+          el_div0.append(el_div0_div0)
+          $("form").append(el_div0)
         })
+        $("form > div").addClass("form-group row")
+        $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
+        $("form > div > label").css("width", equation.calc.labelwidth)
+        $("form > div > label").css("font-style", "italic")
+        $("form > div > label").css("font-weight", "bold")
+        $("form > div > div").addClass("flex-fill mr-1")
+        $("form > div > div > input").addClass("form-control form-control-sm")
+        renderMath();
       })
     })
 
