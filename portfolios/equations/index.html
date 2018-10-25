@@ -255,7 +255,7 @@
     $(".card-columns > .card > div > button").attr("data-toggle", "modal")
     $(".card-columns > .card > div > button").attr("data-target", ".modal")
     $(".card-columns > .card > div > button").text("Calculate")
-    
+
     $(function () {
       renderMath()
       $('[data-toggle="popover"]').popover(
@@ -318,42 +318,64 @@
         else {
           var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
           var equation = equations.filter(function (item) { return item.title == title })[0]
-          $.each(equation.calc.vars, (key, value) => {
-            var arg = equation.args.find(item => item.id == key)
-            var el_div0 = $("<div />")
-            var el_div0_label0 = $("<label />")
-            var el_div0_div0 = $("<div />")
-            var el_div0_div0_input0 = $("<input />")
-            var el_div0_div0_small0 = $("<small />")
-            el_div0_div0_input0.val(value)
-            el_div0_div0_input0.attr("id", key)
-            el_div0_label0.html("$" + arg.sym + "$ :")
-            el_div0_div0_small0.text("$" + arg.def + "$")
+          if (!equation.exchanges) {
+            $.each(equation.calc.vars, (key, value) => {
+              var arg = equation.args.find(item => item.id == key)
+              var el_div0 = $("<div />")
+              var el_div0_label0 = $("<label />")
+              var el_div0_div0 = $("<div />")
+              var el_div0_div0_input0 = $("<input />")
+              var el_div0_div0_small0 = $("<small />")
+              el_div0_div0_input0.val(value)
+              el_div0_div0_input0.attr("id", key)
+              el_div0_label0.html("$" + arg.sym + "$ :")
+              el_div0_div0_small0.text("$" + arg.def + "$")
 
-            el_div0_div0.append(el_div0_div0_input0)
-            el_div0_div0.append(el_div0_div0_small0)
-            el_div0.append(el_div0_label0)
-            el_div0.append(el_div0_div0)
-            $("form").append(el_div0)
-          })
-          equation.yields.forEach((yield, index) => {
-            var el_div0 = $("<div />")
-            var el_div0_label0 = $("<label />")
-            var el_div0_div0 = $("<div />")
-            var el_div0_div0_input0 = $("<input />")
-            var el_div0_div0_small0 = $("<small />")
-            el_div0_div0_input0.attr("id", yield.id)
-            el_div0_div0_input0.attr("readonly", "")
-            el_div0_div0_input0.val(yield.format(math.eval(equation.calc.expr[index], equation.calc.vars)))
-            el_div0_label0.html("$" + yield.sym + "$ :")
-            el_div0_div0_small0.text("$" + yield.def + "$")
+              el_div0_div0.append(el_div0_div0_input0)
+              el_div0_div0.append(el_div0_div0_small0)
+              el_div0.append(el_div0_label0)
+              el_div0.append(el_div0_div0)
+              $("form").append(el_div0)
+            })
+            equation.yields.forEach((yield, index) => {
+              var el_div0 = $("<div />")
+              var el_div0_label0 = $("<label />")
+              var el_div0_div0 = $("<div />")
+              var el_div0_div0_input0 = $("<input />")
+              var el_div0_div0_small0 = $("<small />")
+              el_div0_div0_input0.attr("id", yield.id)
+              el_div0_div0_input0.attr("readonly", "")
+              el_div0_div0_input0.val(yield.format(math.eval(equation.calc.expr[index], equation.calc.vars)))
+              el_div0_label0.html("$" + yield.sym + "$ :")
+              el_div0_div0_small0.text("$" + yield.def + "$")
 
-            el_div0_div0.append(el_div0_div0_input0)
-            el_div0_div0.append(el_div0_div0_small0)
-            el_div0.append(el_div0_label0)
-            el_div0.append(el_div0_div0)
-            $("form").append(el_div0)
-          })
+              el_div0_div0.append(el_div0_div0_input0)
+              el_div0_div0.append(el_div0_div0_small0)
+              el_div0.append(el_div0_label0)
+              el_div0.append(el_div0_div0)
+              $("form").append(el_div0)
+            })
+          }
+          if (equation.exchanges) {
+            console.log(equation)
+            equation.exchanges.forEach((exchange, index) => {
+              var el_div0 = $("<div />")
+              var el_div0_label0 = $("<label />")
+              var el_div0_div0 = $("<div />")
+              var el_div0_div0_input0 = $("<input />")
+              var el_div0_div0_small0 = $("<small />")
+              el_div0_div0_input0.attr("id", exchange.id)
+              el_div0_div0_input0.val(exchange.format(math.eval(equation.calc.expr[(index === 0) ? 1 : index - 1][index], equation.calc.vars)))
+              el_div0_label0.html("$" + exchange.sym + "$ :")
+              el_div0_div0_small0.text("$" + exchange.def + "$")
+
+              el_div0_div0.append(el_div0_div0_input0)
+              el_div0_div0.append(el_div0_div0_small0)
+              el_div0.append(el_div0_label0)
+              el_div0.append(el_div0_div0)
+              $("form").append(el_div0)
+            })
+          }
           $("form > div").addClass("form-group row")
           $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
           $("form > div > label").css("width", equation.calc.labelWidth)
@@ -364,9 +386,29 @@
           // $("form > div > div > input").attr("step", 0.1)
           $("form > div > div > input").on("keyup", function () {
             equation.calc.vars[$(this).attr("id")] = $(this).val()
-            $("form > div > div > input[readonly]").each((index, item) => {
-              $(item).val(equation.yields[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
-            })
+            if (!equation.exchanges) {
+              $("form > div > div > input[readonly]").each((index, item) => {
+                $(item).val(equation.yields[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
+              })
+            }
+            else {
+              $("form > div > div > input").each((index, item) => {
+                if (equation.exchanges[index].id === $(this).attr("id")) {
+                  // console.log($(this).attr("id"))
+                  // console.log(index)
+                  // console.log(equation.calc.vars)
+                  // console.log(equation.exchanges[index].id)
+                  equation.exchanges.forEach((subItem, subIndex) => {
+                    if(subItem.id!==$(this).attr("id")){
+                      equation.calc.vars[equation.exchanges[subIndex].id] = equation.exchanges[subIndex].format(math.eval(equation.calc.expr[subIndex][index], equation.calc.vars))
+                      console.log(equation.calc.vars)
+
+                      }
+                  })
+                  // $(item).val(equation.exchanges[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
+                }
+              })
+            }
           })
           $("form > div > div > small").addClass("form-text text-muted")
           renderMath();

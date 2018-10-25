@@ -1,5 +1,28 @@
 var equations = [
   {
+    category: "conversion",
+    title: "Lineer, dB and dBm",
+    definition: "Lineer to/from decibel conversion especailly for power",
+    formula: " P_{dBm} = P_{dB} + 30 = 10\\log(P) ",
+    // ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 13" },
+    args: [],
+    yields: [],
+    exchanges: [
+      { id: "PdBm", sym: "P_{dBm}", def: "\\textit{Decibels respect to milliwatss [dBm]}", format: function (number) { return number.toFixed(2) } },
+      { id: "PdB", sym: "P_{dB}", def: "\\textit{Decibels respect to watts [dB]}", format: function (number) { return number.toFixed(2) } },
+      { id: "P", sym: "P", def: "\\textit{Watt [W]}", format: function (number) { return number.toFixed(2) } },
+    ],
+    calc: {
+      labelWidth: "40px",
+      vars: { PdBm: 30, PdB: 0, P: 1 },
+      expr: [
+        ["PdBm", "PdBm-30", "10^((PdBm-30)/10)"],
+        ["PdB+30", "P", "10^(PdB/10)"],
+        ["10*log10(P)+30", "10*log10(P)", "P"],
+      ]
+    }
+  },
+  {
     category: "antenna",
     title: "Antenna gain for omnidirectional antennas",
     definition: "Approximate gain for butterfly or omnidricational pattern",
@@ -15,7 +38,7 @@ var equations = [
     ],
     calc: {
       labelWidth: "40px",
-      vars: { theta1: 35, theta2: 75},
+      vars: { theta1: 35, theta2: 75 },
       expr: ["2/(cos(unit(theta1,'deg')) - cos(unit(theta2,'deg')))", "10*log10(2/(cos(unit(theta1,'deg')) - cos(unit(theta2,'deg'))))"]
     }
   },
@@ -43,7 +66,7 @@ var equations = [
     category: "propagation",
     title: "Path loss",
     definition: "Free space path loss in communication link",
-    formula: "L_P = 32.45 + 20\\log10(fR) - G_1 - G_2 \\quad [dB]",
+    formula: "\\begin{aligned}L_P &= 32.45 + 20\\log10(fR) \\\\ &\\quad - G_1 - G_2 \\quad [dB]\\end{aligned}",
     ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 6" },
     args: [
       { id: "f", sym: "f", def: "\\textit{Frequency [MHz]}" },
