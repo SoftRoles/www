@@ -177,7 +177,7 @@
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     k
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
       <div class="modal-content">
         <div class="modal-header my-0 py-1 border-bottom-0">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
@@ -224,11 +224,18 @@
       var el_div1_h0 = $("<h5 />", { html: equation.title })
       if (!!equation.definition) { var el_div1_p0 = $("<p />", { html: equation.definition }) }
       if (!!equation.calc) { var el_div1_button0 = $("<button />") }
-      if (!!equation.ref) { var el_div1_small0 = $("<small />", { text: equation.ref }) }
-
+      if (!!equation.ref) {
+        var el_div1_a0 = $("<a />")
+        var el_div1_a0_small0 = $("<small />", { text: equation.ref.name })
+        if (equation.ref.url) {
+          el_div1_a0.attr("href", equation.ref.url)
+          el_div1_a0.attr("target", "_blank")
+          el_div1_a0.attr("rel", "noopener noreferrer")
+        }
+      }
       el_div1.append(el_div1_h0)
       if (!!equation.definition) el_div1.append(el_div1_p0)
-      if (!!equation.ref) el_div1.append(el_div1_small0)
+      if (!!equation.ref) { el_div1_a0.append(el_div1_a0_small0); el_div1.append(el_div1_a0); }
       if (!!equation.calc) el_div1.append(el_div1_button0)
       el.append(el_div0)
       el.append(el_div1)
@@ -240,14 +247,17 @@
     $(".card-columns > .card > div:odd").addClass("card-body p-2")
     $(".katex-display").css("margin-bottom", "8px")
     $(".card-columns > .card > div > h5").addClass("card-title mt-0 mb-2")
-    $(".card-columns > .card > div > p").addClass("mb-0")
-    $(".card-columns > .card > div > small").addClass("form-text text-muted mt-0")
+    $(".card-columns > .card > div > p").addClass("mb-1")
+    $(".card-columns > .card > div > a").addClass("mt-0")
+    $(".card-columns > .card > div > a > small").addClass("form-text")
+    $(".card-columns > .card > div > a > small").css("font-style", "italic")
     $(".card-columns > .card > div > button").addClass("btn btn-secondary mt-2")
     $(".card-columns > .card > div > button").attr("data-toggle", "modal")
     $(".card-columns > .card > div > button").attr("data-target", ".modal")
     $(".card-columns > .card > div > button").text("Calculate")
-
+    
     $(function () {
+      renderMath()
       $('[data-toggle="popover"]').popover(
         {
           html: true,
@@ -337,7 +347,7 @@
             el_div0_div0_input0.val(yield.format(math.eval(equation.calc.expr[index], equation.calc.vars)))
             el_div0_label0.html("$" + yield.sym + "$ :")
             el_div0_div0_small0.text("$" + yield.def + "$")
-  
+
             el_div0_div0.append(el_div0_div0_input0)
             el_div0_div0.append(el_div0_div0_small0)
             el_div0.append(el_div0_label0)

@@ -1,41 +1,89 @@
 var equations = [
-  // {
-  //   category: "em", title: "Pythogoras",
-  //   definition: "test formula",
-  //   formula: "c = \\pm\\sqrt{a^2 + b^2} \\quad \\text{[unit]}",
-  //   ref: "anonymous",
-  //   args: [
-  //     { id: "a", sym: "\\bm{a}", def: "\\textit{first variable}" },
-  //     { id: "b", sym: "\\bm{b}", def: "\\textit{second variable}" },
-  //     { id: "c", sym: "\\bm{c}", def: "\\textit{result}", isResult: true },
-  //   ],
-  //   calc: {
-  //     labelWidth: "30px",
-  //     vars: { "a": 1, "b": 2, "c": null },
-  //     expr: "a+b"
-  //   }
-  // },
-  // {
-  //   category: "antenna", title: "Parabolic antenna gain",
-  //   definition: "Approximate gain",
-  //   formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\quad \\text{[dB]}",
-  //   args: [
-  //     { id: "k", sym: "\\bm{k}", def: "\\textit{is the efficiency factor [0.5 - 0.6]}" },
-  //     { id: "D", sym: "\\bm{D}", def: "\\textit{diameter of the parabolic reflector [m]}" },
-  //     { id: "lambda", sym: "\\bm{\\lambda}", def: "\\textit{wavelength of the signal [m]}" },
-  //     { id: "G", sym: "\\bm{G}", def: "\\textit{Gain [dB]}", isResult: true },
-  //   ],
-  //   calc: {
-  //     labelWidth: "30px",
-  //     vars: { k: 1, D: "5", lambda: 6.125, G: null },
-  //     expr: "10*log10(k*pi*D/lambda)"
-  //   }
-  // },
+  {
+    category: "antenna",
+    title: "Antenna gain for omnidirectional antennas",
+    definition: "Approximate gain for butterfly or omnidricational pattern",
+    formula: "G = \\dfrac{2}{\\cos\\Theta_1-\\cos\\Theta_2}",
+    ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 13" },
+    args: [
+      { id: "theta1", sym: "\\Theta_1", def: "\\textit{Beam width in first principal plane [deg]}" },
+      { id: "theta2", sym: "\\Theta_2", def: "\\textit{Beam width in second principal plane [deg]}" },
+    ],
+    yields: [
+      { id: "G", sym: "G", def: "\\textit{Antenna gain []}", format: function (number) { return number.toFixed(2) } },
+      { id: "G", sym: "G_{dB}", def: "\\textit{Antenna gain [dB]}", format: function (number) { return number.toFixed(1) } },
+    ],
+    calc: {
+      labelWidth: "40px",
+      vars: { theta1: 35, theta2: 75},
+      expr: ["2/(cos(unit(theta1,'deg')) - cos(unit(theta2,'deg')))", "10*log10(2/(cos(unit(theta1,'deg')) - cos(unit(theta2,'deg'))))"]
+    }
+  },
+  {
+    category: "antenna",
+    title: "Antenna gain for pencil beam antennas",
+    definition: "Approximation of gain for $\\cos^n\\theta$ patterns",
+    formula: "G = \\dfrac{41.253}{\\Theta_1\\Theta_2}",
+    ref: { name: "John D. Kraus, Antennas for All Applications, 3rd Ed., Page 24" },
+    args: [
+      { id: "theta1", sym: "\\Theta_1", def: "\\textit{Beam width in first principal plane [deg]}" },
+      { id: "theta2", sym: "\\Theta_2", def: "\\textit{Beam width in second principal plane [deg]}" },
+    ],
+    yields: [
+      { id: "G", sym: "G", def: "\\textit{Antenna gain []}", format: function (number) { return number.toFixed(1) } },
+      { id: "G", sym: "G_{dB}", def: "\\textit{Antenna gain [dB]}", format: function (number) { return number.toFixed(0) } },
+    ],
+    calc: {
+      labelWidth: "40px",
+      vars: { theta1: 20, theta2: 20 },
+      expr: ["41253/(theta1*theta2)", "10*log10(41253/(theta1*theta2))"]
+    }
+  },
+  {
+    category: "propagation",
+    title: "Path loss",
+    definition: "Free space path loss in communication link",
+    formula: "L_P = 32.45 + 20\\log10(fR) - G_1 - G_2 \\quad [dB]",
+    ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 6" },
+    args: [
+      { id: "f", sym: "f", def: "\\textit{Frequency [MHz]}" },
+      { id: "R", sym: "R", def: "\\textit{Distance [km]}" },
+      { id: "G1", sym: "G_1", def: "\\textit{Gain of transmitter antenna [dB]}" },
+      { id: "G2", sym: "G_2", def: "\\textit{Gain of receiver antenna [dB]}" },
+    ],
+    yields: [
+      { id: "PL", sym: "PL", def: "\\textit{Path loss [dB]}", format: function (number) { return number.toFixed(1) } }
+    ],
+    calc: {
+      labelWidth: "35px",
+      vars: { f: 2200, R: 50, G1: 25, G2: 20 },
+      expr: ["32.45 + 20*log10(f*R) - G1 - G2"]
+    }
+  },
+  {
+    category: "antenna", title: "Parabolic reflector antenna approximate gain",
+    definition: "Approximate gain",
+    formula: "G = 10\\log_{10}k\\left(\\dfrac{\\pi D}{\\lambda}\\right) \\quad \\text{[dB]}",
+    ref: { name: "Electronic-Notes", url: "https://www.electronics-notes.com/articles/antennas-propagation/parabolic-reflector-antenna/antenna-gain-directivity.php" },
+    args: [
+      { id: "k", sym: "k", def: "\\textit{Antenna efficiency factor [0.5 - 0.6]}" },
+      { id: "D", sym: "D", def: "\\textit{Diameter of the parabolic reflector [m]}" },
+      { id: "lambda", sym: "\\lambda", def: "\\textit{Wavelength of the signal [m]}" },
+    ],
+    yields: [
+      { id: "G", sym: "G", def: "\\textit{Gain [dB]}", format: function (number) { return number.toFixed(1) } },
+    ],
+    calc: {
+      labelWidth: "30px",
+      vars: { k: 0.55, D: 5, lambda: 0.6125 },
+      expr: ["10*log10(k*pi*D/lambda)"]
+    }
+  },
   {
     category: "antenna",
     title: "Power density",
     formula: "S(\\theta,\\phi) = \\dfrac{P_oG(\\theta\\phi)}{4\\pi R^2} \\quad [W/m^2]",
-    ref: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 4",
+    ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 4" },
     args: [
       { id: "Po", sym: "P_o", def: "\\textit{Input power [W]}" },
       { id: "G", sym: "G", def: "\\textit{Antenna gain []}" },
@@ -43,25 +91,23 @@ var equations = [
     ],
     yields: [
       { id: "S", sym: "S", def: "\\textit{Power density } \\it{[W\\negthickspace /\\enspace m^2]}", format: function (number) { return number.toExponential(1) } },
-      { id: "SdB", sym: "S", def: "\\textit{Power density } \\it{[dBW\\negthickspace /\\enspace m^2]}", format: function (number) { return number.toFixed(1) } }
-
+      { id: "SdB", sym: "S_{dB}", def: "\\textit{Power density } \\it{[dBW\\negthickspace /\\enspace m^2]}", format: function (number) { return number.toFixed(1) } }
     ],
     calc: {
-      labelWidth: "30px",
+      labelWidth: "45px",
       vars: { Po: 3, G: 31.62, R: 1E6 },
       expr: ["Po*G/(4*pi*R^2)", "10*log10(Po*G/(4*pi*R^2))"],
     }
   },
-  //   {
-  //     category: "antenna",
-  //     title: "Antenna efficiency",
-  //     formula: "\\eta_e = \\dfrac{P_r}{P_o} = \\int_{0}^{2\\pi}\\int_{0}^{\\pi}\\dfrac{G(\\theta\\phi)}{4\\pi}\\sin\\theta d\\theta d\\phi",
-  //     ref: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 4",
-  //     args: [
-  //       { id: "Pr", sym: "P_r", def: "\\textit{Radiated power [W]}" },
-  //       { id: "Po", sym: "P_o", def: "\\textit{Input power [W]}" },
-  //       { id: "G", sym: "G", def: "\\textit{Antenna gain []}" },
-  //       { id: "eta", sym: "\\eta_e", def: "\\textit{Antenna efficiency []}", isResult: true },
-  //     ],
-  //   },
+  {
+    category: "antenna",
+    title: "Antenna efficiency",
+    formula: "\\eta_e = \\dfrac{P_r}{P_o} = \\int_{0}^{2\\pi}\\int_{0}^{\\pi}\\dfrac{G(\\theta\\phi)}{4\\pi}\\sin\\theta d\\theta d\\phi",
+    ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 4" },
+    args: [
+      { id: "Pr", sym: "P_r", def: "\\textit{Radiated power [W]}" },
+      { id: "Po", sym: "P_o", def: "\\textit{Input power [W]}" },
+      { id: "G", sym: "G", def: "\\textit{Antenna gain []}" },
+    ],
+  },
 ]
