@@ -110,6 +110,22 @@
     }
 
     /* card */
+    @media (min-width: 0px) {
+      .card-columns {
+        column-count: 1;
+      }
+    }
+    @media (min-width: 768px) {
+      .card-columns {
+        column-count: 2;
+      }
+    }
+    @media (min-width: 992px) {
+      .card-columns {
+        column-count: 3;
+      }
+    }
+
     .card-title {
       font-size: 1.1rem;
     }
@@ -127,13 +143,13 @@
 
 <body>
   <!-- Header -->
-  <!-- <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;"> -->
-  <!-- <div class="navbar-brand"><a href="/">Anten IO</a> : <a href="/#portfolio">Portfolios</a> : <a href="/portfolios/equations/index.html">Equations</a></div> -->
-  <!-- <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+  <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;">
+    <div class="navbar-brand"><a href="/">Anten IO</a> : <a href="/#portfolio">Portfolios</a> : <a href="/portfolios/equations/index.html">Equations</a></div>
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> -->
-  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    </button>
+    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mr-0">
         <li class="active">
           <a id="feedback" class="nav-link" onclick="openSuggestWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Feedback
@@ -145,16 +161,17 @@
         </li>
       </ul>
     </div> -->
-  <!-- </nav> -->
+  </nav>
 
-  <!-- <div class="container">
+  <div class="container">
     <div class="row  justify-content-center" style="padding-top: 70px;">
       <button class="btn btn-outline-success m-1 active" data-filter="all">All</button>
       <button class="btn btn-outline-success m-1" data-filter="em">Electromagnetic</button>
       <button class="btn btn-outline-success m-1" data-filter="antenna">Antenna</button>
-      <button class="btn btn-outline-success m-1" data-filter="microwave">Propagation</button>
+      <button class="btn btn-outline-success m-1" data-filter="propagation">Propagation</button>
+      <button class="btn btn-outline-success m-1" data-filter="conversion">Conversions</button>
     </div>
-  </div> -->
+  </div>
 
   <br>
   <div class="fade_rule"></div>
@@ -166,12 +183,12 @@
   <div class="card-columns" style="margin-bottom: 70px;"></div>
 
   <!-- Footer -->
-  <!-- <footer class="footer fixed-bottom w-100">
+  <footer class="footer fixed-bottom w-100">
     <div class="container d-flex justify-content-between">
       <span class="text-muted">Beta Testing!</span>
       <a id="feedback" data-toggle="modal" data-target=".modal">Feedback</a>
     </div>
-  </footer> -->
+  </footer>
 
   <!-- modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -208,12 +225,20 @@
   </script>
 
   <script>
+    String.prototype.replaceAll = function (search, replacement) {
+      var target = this;
+      return target.replace(new RegExp(search, 'g'), replacement);
+    };
+
     equations.forEach(function (equation) {
-      var el = $("<div />", { class: equation.category });
+      var el = $("<div />", { class: equation.category.replaceAll(",", "") });
 
       var popover = "\\begin{aligned}"
       equation.args.forEach(function (arg) {
         popover += arg.sym + "&: " + arg.def + "\\\\"
+      })
+      equation.exchanges.forEach(function (item) {
+        popover += item.sym + "&: " + item.def + "\\\\"
       })
       popover += "\\end{aligned}"
       var el_div0 = $("<div />", {
@@ -318,7 +343,7 @@
         else {
           var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
           var equation = equations.filter(function (item) { return item.title == title })[0]
-          if (!equation.exchanges) {
+          if (equation.exchanges.length === 0) {
             $.each(equation.calc.vars, (key, value) => {
               var arg = equation.args.find(item => item.id == key)
               var el_div0 = $("<div />")
@@ -357,7 +382,6 @@
             })
           }
           if (equation.exchanges) {
-            console.log(equation)
             equation.exchanges.forEach((exchange, index) => {
               var el_div0 = $("<div />")
               var el_div0_label0 = $("<label />")
@@ -365,7 +389,7 @@
               var el_div0_div0_input0 = $("<input />")
               var el_div0_div0_small0 = $("<small />")
               el_div0_div0_input0.attr("id", exchange.id)
-              el_div0_div0_input0.val(exchange.format(math.eval(equation.calc.expr[(index === 0) ? 1 : index - 1][index], equation.calc.vars)))
+              el_div0_div0_input0.val(equation.calc.vars[exchange.id])
               el_div0_label0.html("$" + exchange.sym + "$ :")
               el_div0_div0_small0.text("$" + exchange.def + "$")
 
@@ -382,8 +406,6 @@
           $("form > div > div").addClass("flex-fill mr-1")
           $("form > div > div > input").addClass("form-control form-control-sm")
           $("form > div > div > input").attr("type", "number")
-          // $("form > div > div > input").attr("lang", "en")
-          // $("form > div > div > input").attr("step", 0.1)
           $("form > div > div > input").on("keyup", function () {
             equation.calc.vars[$(this).attr("id")] = $(this).val()
             if (!equation.exchanges) {
@@ -393,19 +415,12 @@
             }
             else {
               $("form > div > div > input").each((index, item) => {
-                if (equation.exchanges[index].id === $(this).attr("id")) {
-                  // console.log($(this).attr("id"))
-                  // console.log(index)
-                  // console.log(equation.calc.vars)
-                  // console.log(equation.exchanges[index].id)
+                if (equation.exchanges[index].id !== $(this).attr("id")) {
                   equation.exchanges.forEach((subItem, subIndex) => {
-                    if(subItem.id!==$(this).attr("id")){
-                      equation.calc.vars[equation.exchanges[subIndex].id] = equation.exchanges[subIndex].format(math.eval(equation.calc.expr[subIndex][index], equation.calc.vars))
-                      console.log(equation.calc.vars)
-
-                      }
+                    if (subItem.id === $(this).attr("id")) {
+                      $(item).val(equation.exchanges[index].format(math.eval(equation.calc.expr[subIndex][index], equation.calc.vars)))
+                    }
                   })
-                  // $(item).val(equation.exchanges[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
                 }
               })
             }
