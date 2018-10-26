@@ -212,6 +212,8 @@
   </div>
 
   <script>
+    const dom = document
+
     const renderMath = function () {
       renderMathInElement(document.body, {
         delimiters: [
@@ -225,6 +227,25 @@
   </script>
 
   <script>
+    {
+      let request = new XMLHttpRequest()
+      request.open("GET", "/user", true)
+      request.onload = function () {
+        let user = JSON.parse(request.responseText)
+        console.log(user)
+        if (!user.username) {
+          let request = new XMLHttpRequest()
+          request.open("POST", "/login", true)
+          request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+          let json = { username: "guest", password: "guest" }
+          request.send(JSON.stringify(json))
+        }
+      }
+      request.onerro = () => {
+        console.log(request.status)
+      }
+      request.send()
+    }
     String.prototype.replaceAll = function (search, replacement) {
       var target = this;
       return target.replace(new RegExp(search, 'g'), replacement);
@@ -316,12 +337,13 @@
         if (source == "Feedback") {
           var el_div0 = $("<div />", { class: "row" })
           var el_div1 = $("<div />", { class: "row" })
+          var el_button0 = $("<button />", { id: "fb-send", class: "btn btn-primary flex-fill w-100", text: "Send" })
           var el_div0_label0 = $("<label />", { text: "E-mail" })
           var el_div1_label0 = $("<label />", { text: "Comment" })
           var el_div0_div0 = $("<div />")
           var el_div1_div0 = $("<div />")
-          var el_div0_div0_input0 = $("<input />")
-          var el_div1_div0_textarea0 = $("<textarea />")
+          var el_div0_div0_input0 = $("<input />", { id: "fb-email" })
+          var el_div1_div0_textarea0 = $("<textarea />", { id: "fb-text" })
           el_div1_div0.append(el_div1_div0_textarea0)
           el_div0_div0.append(el_div0_div0_input0)
           el_div0.append(el_div0_label0)
@@ -330,6 +352,7 @@
           el_div1.append(el_div1_div0)
           $("form").append(el_div0)
           $("form").append(el_div1)
+          $("form").append(el_button0)
           $("form > div").addClass("form-group row")
           $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
           $("form > div > label").css("width", "60px")
@@ -338,6 +361,16 @@
           $("form > div > div > input").attr("type", "email")
           $("form > div > div > textarea").addClass("form-control form-control-sm")
           $("form > div > div > textarea").attr("rows", 5)
+          document.getElementById("fb-send").addEventListener("click", e => {
+            e.preventDefault()
+            let request = new XMLHttpRequest()
+            request.open("POST", "/mongodb/api/feedback/recent", true)
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+            let json = { email: dom.getElementById("fb-email").value, text: dom.getElementById("fb-text").value }
+            request.send(JSON.stringify(json))
+            alert("Your message is sent")
+          })
+          dom.getElementById("fb-send").setAttribute("data-dismiss", "modal")
         }
         else {
           var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
@@ -429,8 +462,15 @@
         }
       })
     })
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-
+    gtag('config', 'UA-126752612-1');
   </script>
 
 </body>

@@ -51,7 +51,7 @@ var equations = [
       { id: "P", sym: "P", def: "\\textit{Watt [W]}", format: function (number) { return number.toFixed(2) } },
     ],
     calc: {
-      labelWidth: "40px",
+      labelWidth: "50px",
       vars: { PdBm: 30, PdB: 0, P: 1 },
       expr: [
         ["PdBm", "PdBm-30", "10^((PdBm-30)/10)"],
@@ -67,8 +67,8 @@ var equations = [
     formula: "G = \\dfrac{2}{\\cos\\Theta_1-\\cos\\Theta_2}",
     ref: { name: "Thomas A. Milligan, Modern Antenna Design, 2nd Ed., Chapter 3, Page 13" },
     args: [
-      { id: "theta1", sym: "\\Theta_1", def: "\\textit{Beam width in first principal plane [deg]}" },
-      { id: "theta2", sym: "\\Theta_2", def: "\\textit{Beam width in second principal plane [deg]}" },
+      { id: "theta1", sym: "\\Theta_1", def: "\\textit{Beam width in 1st principal plane [deg]}" },
+      { id: "theta2", sym: "\\Theta_2", def: "\\textit{Beam width in 2nd principal plane [deg]}" },
     ],
     yields: [
       { id: "G", sym: "G", def: "\\textit{Antenna gain []}", format: function (number) { return number.toFixed(2) } },
