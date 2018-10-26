@@ -338,7 +338,6 @@
           $("form > div > div > input").attr("type", "email")
           $("form > div > div > textarea").addClass("form-control form-control-sm")
           $("form > div > div > textarea").attr("rows", 5)
-
         }
         else {
           var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
@@ -408,7 +407,7 @@
           $("form > div > div > input").attr("type", "number")
           $("form > div > div > input").on("keyup", function () {
             equation.calc.vars[$(this).attr("id")] = $(this).val()
-            if (!equation.exchanges) {
+            if (equation.exchanges.length === 0) {
               $("form > div > div > input[readonly]").each((index, item) => {
                 $(item).val(equation.yields[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
               })
