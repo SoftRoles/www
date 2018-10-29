@@ -234,12 +234,26 @@
       var el = $("<div />", { class: equation.category.replaceAll(",", "") });
 
       var popover = "\\begin{aligned}"
-      equation.args.forEach(function (arg) {
-        popover += arg.sym + "&: " + arg.def + "\\\\"
-      })
-      equation.exchanges.forEach(function (item) {
-        popover += item.sym + "&: " + item.def + "\\\\"
-      })
+      if ("consts" in equation) {
+        equation.consts.forEach(function (arg) {
+          popover += arg.sym + "&: " + arg.def + "\\\\"
+        })
+      }
+      if ("iargs" in equation) {
+        equation.iargs.forEach(function (arg) {
+          popover += arg.sym + "&: " + arg.def + "\\\\"
+        })
+      }
+      if ("args" in equation) {
+        equation.args.forEach(function (arg) {
+          popover += arg.sym + "&: " + arg.def + "\\\\"
+        })
+      }
+      if ("exchanges" in equation) {
+        equation.exchanges.forEach(function (item) {
+          popover += item.sym + "&: " + item.def + "\\\\"
+        })
+      }
       popover += "\\end{aligned}"
       var el_div0 = $("<div />", {
         "data-content": katex.renderToString(popover),
@@ -338,24 +352,21 @@
           $("form > div > div > input").attr("type", "email")
           $("form > div > div > textarea").addClass("form-control form-control-sm")
           $("form > div > div > textarea").attr("rows", 5)
-
         }
         else {
           var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
           var equation = equations.filter(function (item) { return item.title == title })[0]
-          if (equation.exchanges.length === 0) {
-            $.each(equation.calc.vars, (key, value) => {
-              var arg = equation.args.find(item => item.id == key)
+          if (!("exchanges" in equation)) {
+            equation.args.forEach((arg, index) => {
               var el_div0 = $("<div />")
               var el_div0_label0 = $("<label />")
               var el_div0_div0 = $("<div />")
               var el_div0_div0_input0 = $("<input />")
               var el_div0_div0_small0 = $("<small />")
-              el_div0_div0_input0.val(value)
-              el_div0_div0_input0.attr("id", key)
+              el_div0_div0_input0.val(equation.calc.vars[arg.id])
+              el_div0_div0_input0.attr("id", arg.id)
               el_div0_label0.html("$" + arg.sym + "$ :")
               el_div0_div0_small0.text("$" + arg.def + "$")
-
               el_div0_div0.append(el_div0_div0_input0)
               el_div0_div0.append(el_div0_div0_small0)
               el_div0.append(el_div0_label0)
@@ -381,7 +392,7 @@
               $("form").append(el_div0)
             })
           }
-          if (equation.exchanges) {
+          else {
             equation.exchanges.forEach((exchange, index) => {
               var el_div0 = $("<div />")
               var el_div0_label0 = $("<label />")
@@ -408,7 +419,7 @@
           $("form > div > div > input").attr("type", "number")
           $("form > div > div > input").on("keyup", function () {
             equation.calc.vars[$(this).attr("id")] = $(this).val()
-            if (!equation.exchanges) {
+            if (!("exchanges" in equation)) {
               $("form > div > div > input[readonly]").each((index, item) => {
                 $(item).val(equation.yields[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
               })
