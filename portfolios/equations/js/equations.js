@@ -72,7 +72,7 @@ var equations = [
       { id: "P", sym: "P", def: "\\textit{Watt [W]}", format: function (number) { return number.toFixed(2) } },
     ],
     calc: {
-      labelWidth: "40px",
+      labelWidth: "50px",
       vars: { PdBm: 30, PdB: 0, P: 1 },
       expr: [
         ["PdBm", "PdBm-30", "10^((PdBm-30)/10)"],
