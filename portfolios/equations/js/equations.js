@@ -1,5 +1,23 @@
 var equations = [
   {
+    category: "antenna",
+    title: "Effective isotropic radiated power",
+    formula: "EIRP = P_T - L_C + G_A \\quad [dBm]",
+    args: [
+      { id: "PT", sym: "P_T", def: "\\textit{Output of the transmitter [dBm]}" },
+      { id: "LC", sym: "L_C", def: "\\textit{Cable loss [dB]}" },
+      { id: "GA", sym: "G_A", def: "\\textit{Antenna gain [dB]}" },
+    ],
+    yields: [
+      { id: "EIRP", sym: "EIRP", def: "\\textit{Effective isotropic radiated power [dBm]}", format: function (number) { return number.toFixed(1) } },
+    ],
+    calc: {
+      labelWidth: "65px",
+      vars: { PT: 30, LC: 15, GA: 12 },
+      expr: ["PT-LC+GA"]
+    }
+  },
+  {
     category: "propagation, antenna",
     title: "Far field condition of the antenna/aperture",
     formula: "R_{ff} = \\dfrac{2D^2}{\\lambda} = \\dfrac{2D^2f}{c_0} \\times 10^6",

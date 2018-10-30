@@ -233,7 +233,6 @@
       request.open("GET", "/user", true)
       request.onload = function () {
         let user = JSON.parse(request.responseText)
-        console.log(user)
         if (!user.username) {
           let request = new XMLHttpRequest()
           request.open("POST", "/login", true)
