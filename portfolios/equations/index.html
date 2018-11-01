@@ -8,142 +8,29 @@
   <title>Anten IO : Portfolios : Equations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="/katex/dist/katex.css">
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/lib/katex/dist/katex.css">
+  <link rel="stylesheet" href="css/main.css">
 
-  <script src="/jquery/dist/jquery.js"></script>
-  <script src="/popper.js/dist/umd/popper.js"></script>
-  <script src="/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="/katex/dist/katex.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.0/math.js"></script>
-  <script defer src="js/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/popper.js/dist/umd/popper.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/lib/katex/dist/katex.js"></script>
+  <script src="/lib/mathjs/dist/math.min.js"></script>
+  <script src="js/auto-render.min.js"></script>
   <script src="js/equations.js"></script>
 
-  <style>
-    /* navbar text color */
-    .navbar .navbar-brand {
-      color: #fed136
-    }
+  <script src="/lib/custom/analytics.js"></script>
+  <script src="/lib/custom/authorize.js"></script>
+  <script src="/lib/custom/ready.js"></script>
+  <script src="/lib/custom/prototypes.js"></script>
+  <script src="/lib/custom/renderMath.js"></script>
 
-    .navbar>.navbar-brand a {
-      color: #fed136
-    }
-
-    /* @media (min-width: 768px) {
-      .navbar> .navbar-brand {
-        color: rgba(255, 255, 255, 0.7)
-      }
-      .navbar> .navbar-brand a {
-        color:  rgba(255, 255, 255, 0.7);
-      }
-    } */
-    .navbar-brand {
-      font-size: 16px;
-      margin-right: 0rem;
-    }
-
-    @media (min-width: 768px) {
-      .navbar-brand {
-        font-size: 18px;
-      }
-    }
-
-    /* navlink */
-    .nav-link {
-      font-size: 14px;
-    }
-
-    @media (min-width: 768px) {
-      .nav-link {
-        font-size: 16px;
-      }
-    }
-
-    /* navbar toggler */
-    .navbar .navbar-toggler {
-      border-color: #ddd;
-    }
-
-    .navbar-toggler {
-      background-color: #fed136;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      font-size: 1.00em;
-    }
-
-    .navbar-toggler-icon {
-      height: 1.25em;
-      width: 1.25em;
-    }
-
-    @media (min-width: 768px) {
-      .navbar-toggler-icon {
-        height: 1em;
-        width: 1em;
-      }
-    }
-
-    .navbar-dark .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#888' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    }
-
-    /* footer */
-    .footer {
-      height: 50px;
-      /* Set the fixed height of the footer here */
-      line-height: 50px;
-      /* Vertically center the text there */
-      background-color: #f5f5f5;
-    }
-
-    /* horizontal line */
-    .fade_rule {
-      height: 10px;
-      background-color: #E6E6E6;
-      width: 100%;
-      margin: 0 auto;
-      background-image: linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
-      background-image: -o-linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
-      background-image: -moz-linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
-      background-image: -webkit-linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
-      background-image: -ms-linear-gradient(left, white 2%, #E6E6E6 50%, white 98%);
-      background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0.02, white), color-stop(0.5, lightgreen), color-stop(0.98, white));
-    }
-
-    /* card */
-    @media (min-width: 0px) {
-      .card-columns {
-        column-count: 1;
-      }
-    }
-    @media (min-width: 768px) {
-      .card-columns {
-        column-count: 2;
-      }
-    }
-    @media (min-width: 992px) {
-      .card-columns {
-        column-count: 3;
-      }
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-    }
-
-    .popover {
-      max-width: 200%;
-    }
-
-    /* form */
-    .form-group{
-      margin-bottom: 0.5rem;
-    }
-  </style>
 </head>
 
 <body>
-  <!-- Header -->
+  <!-- Navbar -->
   <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;">
     <div class="navbar-brand"><a href="/">Anten IO</a> : <a href="/#portfolio">Portfolios</a> : <a href="/portfolios/equations/index.html">Equations</a></div>
     <!-- <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -151,34 +38,21 @@
       <span class="navbar-toggler-icon"></span>
     </button> -->
     <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto mr-0">
-        <li class="active">
-          <a id="feedback" class="nav-link" onclick="openSuggestWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Feedback
-          </a>
-        </li>
-        <li id="add" class="active" style="display: none;">
-          <a class="nav-link" onclick="openaddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add
-          </a>
-        </li>
-      </ul>
+      <ul class="navbar-nav ml-auto mr-0"></ul>
     </div> -->
   </nav>
 
+  <!-- Body -->
   <div class="container">
-    <div class="row  justify-content-center" style="padding-top: 70px;">
-      <button class="btn btn-outline-success m-1 active" data-filter="all">All</button>
-      <button class="btn btn-outline-success m-1" data-filter="em">Electromagnetic</button>
-      <button class="btn btn-outline-success m-1" data-filter="antenna">Antenna</button>
-      <button class="btn btn-outline-success m-1" data-filter="propagation">Propagation</button>
-      <button class="btn btn-outline-success m-1" data-filter="conversion">Conversions</button>
-    </div>
+    <div id="filter" class="row  justify-content-center" style="padding-top: 70px;"></div>
   </div>
 
   <br>
   <div class="fade_rule"></div>
   <br>
-  <p style="text-align: center; font-style: italic; font-size: 80%;">(Click or touch equation to see argument
-    definitions)</p>
+  <p style="text-align: center; font-style: italic; font-size: 80%;">
+    (Click or touch equation to see argument definitions)
+  </p>
   <br>
 
   <div class="card-columns" style="margin-bottom: 70px;"></div>
@@ -191,290 +65,29 @@
     </div>
   </footer>
 
-  <!-- modal -->
+  <!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    k
     <div class="modal-dialog modal-dialog-centered modal" role="document">
       <div class="modal-content">
         <div class="modal-header my-0 py-1 border-bottom-0">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <form>
-            <div class="form-group row">
-
-            </div>
+            <div class="form-group row"></div>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    const dom = document
-
-    const renderMath = function () {
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: "$", right: "$", display: false },
-          { left: "$$", right: "$$", display: true },
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true }
-        ]
-      });
-    }
-  </script>
-
-  <script>
-    {
-      let request = new XMLHttpRequest()
-      request.open("GET", "/user", true)
-      request.onload = function () {
-        let user = JSON.parse(request.responseText)
-        if (!user.username) {
-          let request = new XMLHttpRequest()
-          request.open("POST", "/login", true)
-          request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
-          let json = { username: "guest", password: "guest" }
-          request.send(JSON.stringify(json))
-        }
-      }
-      request.onerro = () => {
-        console.log(request.status)
-      }
-      request.send()
-    }
-    String.prototype.replaceAll = function (search, replacement) {
-      var target = this;
-      return target.replace(new RegExp(search, 'g'), replacement);
-    };
-
-    equations.forEach(function (equation) {
-      var el = $("<div />", { class: equation.category.replaceAll(",", "") });
-
-      var popover = "\\begin{aligned}"
-      if ("consts" in equation) {
-        equation.consts.forEach(function (arg) {
-          popover += arg.sym + "&: " + arg.def + "\\\\"
-        })
-      }
-      if ("iargs" in equation) {
-        equation.iargs.forEach(function (arg) {
-          popover += arg.sym + "&: " + arg.def + "\\\\"
-        })
-      }
-      if ("args" in equation) {
-        equation.args.forEach(function (arg) {
-          popover += arg.sym + "&: " + arg.def + "\\\\"
-        })
-      }
-      if ("exchanges" in equation) {
-        equation.exchanges.forEach(function (item) {
-          popover += item.sym + "&: " + item.def + "\\\\"
-        })
-      }
-      popover += "\\end{aligned}"
-      var el_div0 = $("<div />", {
-        "data-content": katex.renderToString(popover),
-        html: katex.renderToString(equation.formula, { displayMode: true, throwOnError: false })
-      })
-      var el_div1 = $("<div />")
-      var el_div1_h0 = $("<h5 />", { html: equation.title })
-      if (!!equation.definition) { var el_div1_p0 = $("<p />", { html: equation.definition }) }
-      if (!!equation.calc) { var el_div1_button0 = $("<button />") }
-      if (!!equation.ref) {
-        var el_div1_a0 = $("<a />")
-        var el_div1_a0_small0 = $("<small />", { text: equation.ref.name })
-        if (equation.ref.url) {
-          el_div1_a0.attr("href", equation.ref.url)
-          el_div1_a0.attr("target", "_blank")
-          el_div1_a0.attr("rel", "noopener noreferrer")
-        }
-      }
-      el_div1.append(el_div1_h0)
-      if (!!equation.definition) el_div1.append(el_div1_p0)
-      if (!!equation.ref) { el_div1_a0.append(el_div1_a0_small0); el_div1.append(el_div1_a0); }
-      if (!!equation.calc) el_div1.append(el_div1_button0)
-      el.append(el_div0)
-      el.append(el_div1)
-      el.appendTo($(".card-columns"))
-    })
-    $(".card-columns > div").addClass("card mx-1 my-1 text-center")
-    $(".card-columns > .card > div:even").attr("tabIndex", 0)
-    $(".card-columns > .card > div:even").attr("data-toggle", "popover")
-    $(".card-columns > .card > div:odd").addClass("card-body p-2")
-    $(".katex-display").css("margin-bottom", "8px")
-    $(".card-columns > .card > div > h5").addClass("card-title mt-0 mb-2")
-    $(".card-columns > .card > div > p").addClass("mb-1")
-    $(".card-columns > .card > div > a").addClass("mt-0")
-    $(".card-columns > .card > div > a > small").addClass("form-text")
-    $(".card-columns > .card > div > a > small").css("font-style", "italic")
-    $(".card-columns > .card > div > button").addClass("btn btn-secondary mt-2")
-    $(".card-columns > .card > div > button").attr("data-toggle", "modal")
-    $(".card-columns > .card > div > button").attr("data-target", ".modal")
-    $(".card-columns > .card > div > button").text("Calculate")
-
-    $(function () {
-      renderMath()
-      $('[data-toggle="popover"]').popover(
-        {
-          html: true,
-          trigger: "focus",
-          placement: "bottom",
-        }
-      )
-
-      $('.popover-dismiss').popover({
-        trigger: 'focus',
-      })
-
-      $(".btn-outline-success").click(function () {
-        var value = $(this).attr('data-filter');
-        if (value == "all") {
-          $('.card').show('1000');
-        }
-        else {
-          $(".card").not('.' + value).hide('3000');
-          $('.card').filter('.' + value).show('3000');
-        }
-
-        $(".btn-outline-success").removeClass("active")
-        $(this).addClass("active");
-      });
-
-      // calculate modal
-      $('.modal').on('shown.bs.modal', function (e) {
-        $("form").empty()
-        var source = e.relatedTarget.text
-        if (source == "Feedback") {
-          var el_div0 = $("<div />", { class: "row" })
-          var el_div1 = $("<div />", { class: "row" })
-          var el_button0 = $("<button />", { id: "fb-send", class: "btn btn-primary flex-fill w-100", text: "Send" })
-          var el_div0_label0 = $("<label />", { text: "E-mail" })
-          var el_div1_label0 = $("<label />", { text: "Comment" })
-          var el_div0_div0 = $("<div />")
-          var el_div1_div0 = $("<div />")
-          var el_div0_div0_input0 = $("<input />", { id: "fb-email" })
-          var el_div1_div0_textarea0 = $("<textarea />", { id: "fb-text" })
-          el_div1_div0.append(el_div1_div0_textarea0)
-          el_div0_div0.append(el_div0_div0_input0)
-          el_div0.append(el_div0_label0)
-          el_div1.append(el_div1_label0)
-          el_div0.append(el_div0_div0)
-          el_div1.append(el_div1_div0)
-          $("form").append(el_div0)
-          $("form").append(el_div1)
-          $("form").append(el_button0)
-          $("form > div").addClass("form-group row")
-          $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
-          $("form > div > label").css("width", "60px")
-          $("form > div > div").addClass("flex-fill mr-1")
-          $("form > div > div > input").addClass("form-control form-control-sm")
-          $("form > div > div > input").attr("type", "email")
-          $("form > div > div > textarea").addClass("form-control form-control-sm")
-          $("form > div > div > textarea").attr("rows", 5)
-        }
-        else {
-          var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
-          var equation = equations.filter(function (item) { return item.title == title })[0]
-          if (!("exchanges" in equation)) {
-            equation.args.forEach((arg, index) => {
-              var el_div0 = $("<div />")
-              var el_div0_label0 = $("<label />")
-              var el_div0_div0 = $("<div />")
-              var el_div0_div0_input0 = $("<input />")
-              var el_div0_div0_small0 = $("<small />")
-              el_div0_div0_input0.val(equation.calc.vars[arg.id])
-              el_div0_div0_input0.attr("id", arg.id)
-              el_div0_label0.html("$" + arg.sym + "$ :")
-              el_div0_div0_small0.text("$" + arg.def + "$")
-              el_div0_div0.append(el_div0_div0_input0)
-              el_div0_div0.append(el_div0_div0_small0)
-              el_div0.append(el_div0_label0)
-              el_div0.append(el_div0_div0)
-              $("form").append(el_div0)
-            })
-            equation.yields.forEach((yield, index) => {
-              var el_div0 = $("<div />")
-              var el_div0_label0 = $("<label />")
-              var el_div0_div0 = $("<div />")
-              var el_div0_div0_input0 = $("<input />")
-              var el_div0_div0_small0 = $("<small />")
-              el_div0_div0_input0.attr("id", yield.id)
-              el_div0_div0_input0.attr("readonly", "")
-              el_div0_div0_input0.val(yield.format(math.eval(equation.calc.expr[index], equation.calc.vars)))
-              el_div0_label0.html("$" + yield.sym + "$ :")
-              el_div0_div0_small0.text("$" + yield.def + "$")
-
-              el_div0_div0.append(el_div0_div0_input0)
-              el_div0_div0.append(el_div0_div0_small0)
-              el_div0.append(el_div0_label0)
-              el_div0.append(el_div0_div0)
-              $("form").append(el_div0)
-            })
-          }
-          else {
-            equation.exchanges.forEach((exchange, index) => {
-              var el_div0 = $("<div />")
-              var el_div0_label0 = $("<label />")
-              var el_div0_div0 = $("<div />")
-              var el_div0_div0_input0 = $("<input />")
-              var el_div0_div0_small0 = $("<small />")
-              el_div0_div0_input0.attr("id", exchange.id)
-              el_div0_div0_input0.val(equation.calc.vars[exchange.id])
-              el_div0_label0.html("$" + exchange.sym + "$ :")
-              el_div0_div0_small0.text("$" + exchange.def + "$")
-
-              el_div0_div0.append(el_div0_div0_input0)
-              el_div0_div0.append(el_div0_div0_small0)
-              el_div0.append(el_div0_label0)
-              el_div0.append(el_div0_div0)
-              $("form").append(el_div0)
-            })
-          }
-          $("form > div").addClass("form-group row")
-          $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
-          $("form > div > label").css("width", equation.calc.labelWidth)
-          $("form > div > div").addClass("flex-fill mr-1")
-          $("form > div > div > input").addClass("form-control form-control-sm")
-          $("form > div > div > input").attr("type", "number")
-          $("form > div > div > input").on("keyup", function () {
-            equation.calc.vars[$(this).attr("id")] = $(this).val()
-            if (!("exchanges" in equation)) {
-              $("form > div > div > input[readonly]").each((index, item) => {
-                $(item).val(equation.yields[index].format(math.eval(equation.calc.expr[index], equation.calc.vars)))
-              })
-            }
-            else {
-              $("form > div > div > input").each((index, item) => {
-                if (equation.exchanges[index].id !== $(this).attr("id")) {
-                  equation.exchanges.forEach((subItem, subIndex) => {
-                    if (subItem.id === $(this).attr("id")) {
-                      $(item).val(equation.exchanges[index].format(math.eval(equation.calc.expr[subIndex][index], equation.calc.vars)))
-                    }
-                  })
-                }
-              })
-            }
-          })
-          $("form > div > div > small").addClass("form-text text-muted")
-          renderMath();
-        }
-      })
-    })
-  </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-126752612-1');
-  </script>
+  <script src="js/navbar-menu.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/popover.js"></script>
+  <script src="js/filter.js"></script>
 
 </body>
-
 </html>
