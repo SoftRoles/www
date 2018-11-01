@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
   <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"> -->
-  <link href="bower_components/webix/codebase/webix.css" rel="stylesheet">
+  <link href="/lib/webix/webix.css" rel="stylesheet">
   <style type="text/css">
     .gallery-title {
       font-size: 36px;
@@ -153,10 +153,18 @@
       margin-top: 40px;
     }
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> -->
-  <script src="bower_components/webix/codebase/webix.js"></script>
+  <script src="/lib/webix/webix.js"></script>
+
+  <script src="/lib/custom/analytics.js"></script>
+  <script src="/lib/custom/authorize.js"></script>
+  <script src="/lib/custom/analytics.js"></script>
+  <script src="/lib/custom/prototypes.js"></script>
+
 
 </head>
 
@@ -254,23 +262,6 @@
   </footer>
 
   <script type="text/javascript">
-    String.prototype.replaceAll = function (search, replacement) {
-      var target = this;
-      return target.replace(new RegExp(search, 'g'), replacement);
-    };
-    Array.prototype.shuffle = function () {
-      var input = this;
-
-      for (var i = input.length - 1; i >= 0; i--) {
-
-        var randomIndex = Math.floor(Math.random() * (i + 1));
-        var itemAtIndex = input[randomIndex];
-
-        input[randomIndex] = input[i];
-        input[i] = itemAtIndex;
-      }
-      return input;
-    }
 
     // add item menu
     function mark_portfolio(obj) {
@@ -287,21 +278,12 @@
     }
 
     $(document).ready(function () {
-      // var element = document.getElementById("suggest")
-      // element.setAttribute("style", element.getAttribute("style") + "display: none;")
-
-      // get user
-      webix.ajax().get("/user", function (t, d, x) {
-        if (d.json().username) {
-          if (d.json().username == "hsyn") {
-            var element = document.getElementById("addItem")
-            element.setAttribute("style", element.getAttribute("style") + "display: block;")
-          }
+      setTimeout(() => {
+        if (user.username == "hsyn") {
+          var element = document.getElementById("addItem")
+          element.setAttribute("style", element.getAttribute("style") + "display: block;")
         }
-        else {
-          webix.send("/login?source=portfolios/industry/index.html", { username: "guest", password: "guest" })
-        }
-      })
+      }, 1000)
 
       // filter
       $(".filter-button").click(function () {
@@ -481,7 +463,7 @@
                   id: "suggestItem", view: "button", label: "Send", click: function () {
                     webix.ajax().header({ "Content-type": "application/json" }).post("/mongodb/api/favorites/suggest", { "message": $$("suggestMessage").getValue() }, function (t, d, x) {
                       console.log(d.json())
-                 $$("suggestWin").close() 
+                      $$("suggestWin").close()
                     })
                   }
                 },
@@ -496,15 +478,7 @@
     }
   </script>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'UA-126752612-1');
-  </script>
 
 </body>
 
