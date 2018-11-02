@@ -46,11 +46,11 @@ ready(() => {
             let request = new XMLHttpRequest()
             request.open("POST", "/mongodb/api/feedback/recent", true)
             request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
-            let json = { email: dom.getElementById("fb-email").value, text: dom.getElementById("fb-text").value }
+            let json = { email: document.getElementById("fb-email").value, text: document.getElementById("fb-text").value }
             request.send(JSON.stringify(json))
             alert("Your message is sent")
           })
-          dom.getElementById("fb-send").setAttribute("data-dismiss", "modal")
+          document.getElementById("fb-send").setAttribute("data-dismiss", "modal")
     }
     else {
       var title = e.relatedTarget.parentElement.childNodes[0].innerHTML
