@@ -5,7 +5,7 @@ ready(() => {
     if (source == "Feedback") {
       var el_div0 = $("<div />", { class: "row" })
       var el_div1 = $("<div />", { class: "row" })
-      var el_button0 = $("<button />", { id: "fb-send", class: "btn btn-primary flex-fill w-100", text: "Send" })
+      var el_button0 = $("<button />", { id: "fb-send", class: "btn btn-success", text: "Send" })
       var el_div0_label0 = $("<label />", { text: "E-mail" })
       var el_div1_label0 = $("<label />", { text: "Comment" })
       var el_div0_div0 = $("<div />")
@@ -21,6 +21,8 @@ ready(() => {
       $("form").append(el_div0)
       $("form").append(el_div1)
       $("form").append(el_button0)
+      $("form").css("text-align","center")
+      $("form > button").css("width","100px")
       $("form > div").addClass("form-group row")
       $("form > div > label").addClass("col-form-label col-form-label-sm text-right mr-2")
       $("form > div > label").css("width", "60px")
