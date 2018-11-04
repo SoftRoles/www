@@ -65,7 +65,7 @@ var equations = [
   {
     category: "conversion",
     title: "Inches and millimeter",
-    formula: " \\begin{aligned}1 \\thickspace Inch &= 25.4 \\thickspace millimeters \\\\ 1 \\thickspace millimeter &= 0.0393700787 \\thickspace inches \\end{aligned}",
+    formula: " \\begin{aligned}1 \\thickspace inch &= 25.4 \\thickspace millimeters \\\\ 1 \\thickspace mm &= 0.03937 \\thickspace inches \\end{aligned}",
     exchanges: [
       { id: "inch", sym: "inch", def: "\\textit{Inches}", format: function (number) { return number.toFixed(6) } },
       { id: "mm", sym: "mm", def: "\\textit{Millimeters}", format: function (number) { return number.toFixed(6) } },
