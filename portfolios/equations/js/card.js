@@ -1,28 +1,15 @@
 ready(() => {
+  let argTypes = ["consts", "iargs", "args", "exchanges"]
   equations.forEach(function (equation) {
     var el = $("<div />", { class: equation.category.replaceAll(",", "") });
-  
     var popover = "\\begin{aligned}"
-    if ("consts" in equation) {
-      equation.consts.forEach(function (arg) {
-        popover += arg.sym + "&: " + arg.def + "\\\\"
-      })
-    }
-    if ("iargs" in equation) {
-      equation.iargs.forEach(function (arg) {
-        popover += arg.sym + "&: " + arg.def + "\\\\"
-      })
-    }
-    if ("args" in equation) {
-      equation.args.forEach(function (arg) {
-        popover += arg.sym + "&: " + arg.def + "\\\\"
-      })
-    }
-    if ("exchanges" in equation) {
-      equation.exchanges.forEach(function (item) {
-        popover += item.sym + "&: " + item.def + "\\\\"
-      })
-    }
+    argTypes.forEach((argType) => {
+      if(equation[argType]){
+        equation[argType].forEach((arg) => {
+          popover += arg.sym + "&: " + arg.def + "\\\\"
+        })
+      }
+    })
     popover += "\\end{aligned}"
     var el_div0 = $("<div />", {
       "data-content": katex.renderToString(popover),
