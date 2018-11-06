@@ -9,13 +9,14 @@ ready(() => {
   categories.forEach((category) => {
     $("#filter").append(
       $("<button />", {
-        class: (category.id == "all") ? "active btn btn-outline-success m-1": "btn btn-outline-success m-1",
+        class: (category.id == "all") ? "active": "",
         "data-filter": category.id,
         text: category.name
       })
     )
   })
-  $(".btn-outline-success").click(function () {
+  $("#filter > button").addClass("btn btn-outline-success m-1")
+  $("#filter > button").click(function () {
     var value = $(this).attr('data-filter');
     if (value == "all") {
       $('.card').show('1000');
@@ -25,7 +26,7 @@ ready(() => {
       $('.card').filter('.' + value).show('3000');
     }
 
-    $(".btn-outline-success").removeClass("active")
+    $("#filter > button").removeClass("active")
     $(this).addClass("active");
   });
 })
