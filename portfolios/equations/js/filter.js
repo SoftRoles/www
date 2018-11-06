@@ -5,20 +5,16 @@ let categories = [
   { id: "conversion", name: "Conversion" },
 ]
 
-let categoryDoms = categories.map((category) => {
-  var categoryDom = {
-    type: "button",
-    class: "btn btn-outline-success m-1",
-    attrs: { "data-filter": category.id },
-    text: category.name
-  }
-  if (category.id == "all") categoryDom.class += " active"
-  return categoryDom
-})
-
 ready(() => {
-  var filter = document.getElementById("filter")
-  categoryDoms.appendToDom(filter)
+  categories.forEach((category) => {
+    $("#filter").append(
+      $("<button />", {
+        class: (category.id == "all") ? "active btn btn-outline-success m-1": "btn btn-outline-success m-1",
+        "data-filter": category.id,
+        text: category.name
+      })
+    )
+  })
   $(".btn-outline-success").click(function () {
     var value = $(this).attr('data-filter');
     if (value == "all") {
