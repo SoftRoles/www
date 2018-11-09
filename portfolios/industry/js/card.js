@@ -4,7 +4,7 @@ ready(() => {
     el.removeChild(el.firstChild);
   }
 
-  webix.ajax().get("/mongodb/api/favorites/links?portfolio=industry", function (t, d, x) {
+  setTimeout(()=>{webix.ajax().get("/mongodb/api/favorites/links?portfolio=industry", function (t, d, x) {
     var companies = d.json()
     companies.shuffle()
     for (var i = 0; i < companies.length; i++) {
@@ -35,4 +35,5 @@ ready(() => {
       el.appendChild(el_div0)
     }
   })
+                 }, 2000)
 })
