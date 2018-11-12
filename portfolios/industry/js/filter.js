@@ -12,7 +12,7 @@ let categories = [
 ]
 
 ready(function() {
-  categories.forEach((category) => {
+  categories.forEach(function(category){
     $("#filter").append(
       $("<button />", {
         class: (category.id == "all") ? "active" : "",
