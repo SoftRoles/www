@@ -1,4 +1,4 @@
-ready(() => {
+ready(function() {
   $('.modal').on('shown.bs.modal', function (e) {
     var el = document.querySelector("form");
     while (el.firstChild) el.removeChild(el.firstChild);
