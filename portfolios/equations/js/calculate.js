@@ -2,7 +2,7 @@ function calculate(event) {
   var title = event.relatedTarget.parentElement.childNodes[0].innerHTML
   var equation = equations.filter(function (item) { return item.title == title })[0]
   if (!("exchanges" in equation)) {
-    equation.args.forEach((arg, index) => {
+    equation.args.forEach(function (arg, index) {
       var el_div0 = $("<div />")
       var el_div0_label0 = $("<label />")
       var el_div0_div0 = $("<div />")
@@ -18,7 +18,7 @@ function calculate(event) {
       el_div0.append(el_div0_div0)
       $("form").append(el_div0)
     })
-    equation.yields.forEach((yield, index) => {
+    equation.yields.forEach(function (yield, index) {
       var el_div0 = $("<div />")
       var el_div0_label0 = $("<label />")
       var el_div0_div0 = $("<div />")
@@ -38,7 +38,7 @@ function calculate(event) {
     })
   }
   else {
-    equation.exchanges.forEach((exchange, index) => {
+    equation.exchanges.forEach(function (exchange, index) {
       var el_div0 = $("<div />")
       var el_div0_label0 = $("<label />")
       var el_div0_div0 = $("<div />")
@@ -65,15 +65,15 @@ function calculate(event) {
   $("form > div > div > input").on("keyup", function () {
     equation.calc.vars[$(this).attr("id")] = $(this).val()
     if (!("exchanges" in equation)) {
-      $("form > div > div > input[readonly]").each((index, item) => {
+      $("form > div > div > input[readonly]").each(function (index, item) {
         let value = math.eval(equation.calc.expr[index], equation.calc.vars)
         $(item).val(equation.yields[index].format(value))
       })
     }
     else {
-      $("form > div > div > input").each((index, item) => {
+      $("form > div > div > input").each(function (index, item) {
         if (equation.exchanges[index].id !== $(this).attr("id")) {
-          equation.exchanges.forEach((subItem, subIndex) => {
+          equation.exchanges.forEach(function (subItem, subIndex) {
             if (subItem.id === $(this).attr("id")) {
               let value = math.eval(equation.calc.expr[subIndex][index], equation.calc.vars)
               $(item).val(equation.exchanges[index].format(value))

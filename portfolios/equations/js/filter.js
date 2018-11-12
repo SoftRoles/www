@@ -5,11 +5,11 @@ let categories = [
   { id: "conversion", name: "Conversion" },
 ]
 
-ready(() => {
-  categories.forEach((category) => {
+ready(function () {
+  categories.forEach(function (category) {
     $("#filter").append(
       $("<button />", {
-        class: (category.id == "all") ? "active": "",
+        class: (category.id == "all") ? "active" : "",
         "data-filter": category.id,
         text: category.name
       })
