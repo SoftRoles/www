@@ -1,10 +1,10 @@
-ready(() => {
+ready(function() {
   var el = document.querySelector(".card-columns");
   while (el.firstChild) {
     el.removeChild(el.firstChild);
   }
 
-  setTimeout(()=>{webix.ajax().get("/mongodb/api/favorites/links?portfolio=industry", function (t, d, x) {
+  setTimeout(function(){webix.ajax().get("/mongodb/api/favorites/links?portfolio=industry", function (t, d, x) {
     var companies = d.json()
     companies.shuffle()
     for (var i = 0; i < companies.length; i++) {
