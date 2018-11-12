@@ -11,7 +11,7 @@ let categories = [
   { id: "radome", name: "Radome" }
 ]
 
-ready(() => {
+ready(function() {
   categories.forEach((category) => {
     $("#filter").append(
       $("<button />", {
