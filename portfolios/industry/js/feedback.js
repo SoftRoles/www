@@ -27,7 +27,7 @@ function feedback() {
   $("form > div > div > input").attr("type", "email")
   $("form > div > div > textarea").addClass("form-control form-control-sm")
   $("form > div > div > textarea").attr("rows", 5)
-  document.getElementById("fb-send").addEventListener("click", e => {
+  document.getElementById("fb-send").addEventListener("click", function(e) {
     e.preventDefault()
     let request = new XMLHttpRequest()
     request.open("POST", "/mongodb/api/feedback/recent", true)
