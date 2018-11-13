@@ -2,7 +2,6 @@ var equations = [
   {
     category: "conversion",
     title: "VSWR, reflection coefficient and return  loss",
-    // definition: "Free space frequency and wavelength",
     formula: " \\begin{aligned} " +
       "VSWR &= \\dfrac{1+S_{11}}{1-S_{11}} = \\dfrac{1+10^{\\frac{-R_L}{20}}}{1-10^{\\frac{-R_L}{20}}} \\\\[15pt]" +
       "S_{11} &= \\dfrac{VSWR-1}{VSWR+1} = 10^{\\frac{-R_L}{20}} \\\\[15pt]" +
