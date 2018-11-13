@@ -6,10 +6,10 @@ var equations = [
     formula: " \\begin{aligned} " +
       "VSWR &= \\dfrac{1+S_{11}}{1-S_{11}} = \\dfrac{1+10^{\\frac{-R_L}{20}}}{1-10^{\\frac{-R_L}{20}}} \\\\[15pt]" +
       "S_{11} &= \\dfrac{VSWR-1}{VSWR+1} = 10^{\\frac{-R_L}{20}} \\\\[15pt]" +
-      "R_L &= S_{11} [dB] = -20\\log S_{11} \\\\ &=  -20\\log  \\dfrac{VSWR-1}{VSWR+1} \\quad [dB]" +
+      "R_L &= -S_{11} [dB] = -20\\log S_{11} \\\\ &=  -20\\log  \\dfrac{VSWR-1}{VSWR+1} \\quad [dB]" +
       "\\end{aligned} ",
     exchanges: [
-      { id: "vswr", sym: "VSWR", def: "\\textit{Standing wave ratio}", format: function (number) { return number.toFixed(3) } },
+      { id: "vswr", sym: "VSWR", def: "\\textit{Voltage standing wave ratio}", format: function (number) { return number.toFixed(3) } },
       { id: "s11", sym: "S_{11}", def: "\\textit{Reflection coefficient}", format: function (number) { return number.toFixed(4) } },
       { id: "rl", sym: "R_L", def: "\\textit{Return loss [dB]}", format: function (number) { return number.toFixed(3) } },
     ],
