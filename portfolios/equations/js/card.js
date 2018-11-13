@@ -1,4 +1,4 @@
-ready(() => {
+ready(function() {
   let argTypes = ["consts", "iargs", "args", "exchanges"]
   equations.forEach(function (equation) {
     var el = $("<div />", { class: equation.category.replaceAll(",", "") });
