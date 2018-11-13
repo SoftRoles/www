@@ -3,9 +3,9 @@ ready(function() {
   equations.forEach(function (equation) {
     var el = $("<div />", { class: equation.category.replaceAll(",", "") });
     var popover = "\\begin{aligned}"
-    argTypes.forEach((argType) => {
+    argTypes.forEach(function(argType){
       if(equation[argType]){
-        equation[argType].forEach((arg) => {
+        equation[argType].forEach(function(arg){
           popover += arg.sym + "&: " + arg.def + "\\\\"
         })
       }
