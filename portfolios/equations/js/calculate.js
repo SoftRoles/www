@@ -63,6 +63,7 @@ function calculate(event) {
   $("form > div > div > input").addClass("form-control form-control-sm")
   $("form > div > div > input").attr("type", "number")
   $("form > div > div > input").on("keyup", function () {
+    let changedDom = this
     equation.calc.vars[$(this).attr("id")] = $(this).val()
     if (!("exchanges" in equation)) {
       $("form > div > div > input[readonly]").each(function (index, item) {
@@ -72,9 +73,9 @@ function calculate(event) {
     }
     else {
       $("form > div > div > input").each(function (index, item) {
-        if (equation.exchanges[index].id !== $(this).attr("id")) {
+        if (equation.exchanges[index].id !== $(changedDom).attr("id")) {
           equation.exchanges.forEach(function (subItem, subIndex) {
-            if (subItem.id === $(this).attr("id")) {
+            if (subItem.id === $(changedDom).attr("id")) {
               let value = math.eval(equation.calc.expr[subIndex][index], equation.calc.vars)
               $(item).val(equation.exchanges[index].format(value))
             }

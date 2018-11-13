@@ -1,5 +1,29 @@
 var equations = [
   {
+    category: "conversion",
+    title: "VSWR, reflection coefficient and return  loss",
+    // definition: "Free space frequency and wavelength",
+    formula: " \\begin{aligned} " +
+      "VSWR &= \\dfrac{1+S_{11}}{1-S_{11}} = \\dfrac{1+10^{\\frac{-R_L}{20}}}{1-10^{\\frac{-R_L}{20}}} \\\\[15pt]" +
+      "S_{11} &= \\dfrac{VSWR-1}{VSWR+1} = 10^{\\frac{-R_L}{20}} \\\\[15pt]" +
+      "R_L &= S_{11} [dB] = -20\\log S_{11} \\\\ &=  -20\\log  \\dfrac{VSWR-1}{VSWR+1} \\quad [dB]" +
+      "\\end{aligned} ",
+    exchanges: [
+      { id: "vswr", sym: "VSWR", def: "\\textit{Standing wave ratio}", format: function (number) { return number.toFixed(3) } },
+      { id: "s11", sym: "S_{11}", def: "\\textit{Reflection coefficient}", format: function (number) { return number.toFixed(4) } },
+      { id: "rl", sym: "R_L", def: "\\textit{Return loss [dB]}", format: function (number) { return number.toFixed(3) } },
+    ],
+    calc: {
+      labelWidth: "65px",
+      vars: { vswr: 1.2, s11: 0.0909, rl: 20.828 },
+      expr: [
+        ["vswr", "(vswr-1)/(vswr+1)", "-20*log10((vswr-1)/(vswr+1))"],
+        ["(1+s11)/(1-s11)", "s11", "-20*log10(s11)"],
+        ["(1+10^(-rl/20))/(1-10^(-rl/20))", "10^(-rl/20)", "rl"]
+      ]
+    }
+  },
+  {
     category: "antenna",
     title: "Effective isotropic radiated power",
     formula: "EIRP = P_T - L_C + G_A \\quad [dBm]",
@@ -94,7 +118,7 @@ var equations = [
       vars: { PdBm: 30, PdB: 0, P: 1 },
       expr: [
         ["PdBm", "PdBm-30", "10^((PdBm-30)/10)"],
-        ["PdB+30", "P", "10^(PdB/10)"],
+        ["PdB+30", "PdB", "10^(PdB/10)"],
         ["10*log10(P)+30", "10*log10(P)", "P"],
       ]
     }
