@@ -8,7 +8,8 @@ let categories = [
   { id: "cable-connector", name: "Cable & Connector" },
   { id: "pcb", name: "PCB" },
   { id: "absorber", name: "Absorber" },
-  { id: "radome", name: "Radome" }
+  { id: "radome", name: "Radome" },
+  { id: "software", name: "Software" }
 ]
 
 ready(function() {
