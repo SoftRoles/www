@@ -1,24 +1,30 @@
 var equations = [
   {
     category: "conversion",
-    title: "VSWR, reflection coefficient and return  loss",
+    title: "VSWR, reflection coefficient, return  loss, reflected and transmitted power",
     formula: " \\begin{aligned} " +
-      "\\footnotesize VSWR &= \\dfrac{1+S_{11}}{1-S_{11}} = \\dfrac{1+10^{\\frac{-R_L}{20}}}{1-10^{\\frac{-R_L}{20}}} \\\\[15pt]" +
-      "S_{11} &= \\dfrac{\\footnotesize VSWR-1}{\\footnotesize VSWR+1} = 10^{\\frac{-R_L}{20}} \\\\[15pt]" +
-      "R_L &= -S_{11} [dB] = -20\\log S_{11} \\\\ &=  -20\\log  \\dfrac{\\footnotesize VSWR-1}{\\footnotesize VSWR+1} \\quad [dB]" +
+      "VSWR &= \\dfrac{1+S_{11}}{1-S_{11}} \\\\[10pt]" +
+      "\\Gamma \\thickspace \\backslash \\thickspace S_{11} &= \\dfrac{\\footnotesize VSWR-1}{\\footnotesize VSWR+1} = 10^{\\frac{-R_L}{20}} \\\\[10pt]" +
+      "R_L &= -\\Gamma_{dB} = -20\\log \\Gamma \\quad [dB] \\\\" +
+      "P_R &= 100\\times\\Gamma^2 \\quad [\\%] \\\\" +
+      "P_T &= 100\\times(1-\\Gamma^2) \\quad [\\%] " +
       "\\end{aligned} ",
     exchanges: [
       { id: "vswr", sym: "VSWR", def: "\\textit{Voltage standing wave ratio}", format: function (number) { return number.toFixed(3) } },
-      { id: "s11", sym: "S_{11}", def: "\\textit{Reflection coefficient}", format: function (number) { return number.toFixed(4) } },
+      { id: "s11", sym: "\\Gamma \\thickspace \\backslash \\thickspace S_{11}", def: "\\textit{Reflection coefficient}", format: function (number) { return number.toFixed(4) } },
       { id: "rl", sym: "R_L", def: "\\textit{Return loss [dB]}", format: function (number) { return number.toFixed(3) } },
+      { id: "pr", sym: "P_R", def: "\\textit{Reflected power [\\%]}", format: function (number) { return number.toFixed(3) } },
+      { id: "pt", sym: "P_T", def: "\\textit{Transmitted power [\\%]}", format: function (number) { return number.toFixed(3) } },
     ],
     calc: {
       labelWidth: "65px",
-      vars: { vswr: 1.2, s11: 0.0909, rl: 20.828 },
+      vars: { vswr: 1.2, s11: 0.0909, rl: 20.828, pr:0.829, pt:99.173 },
       expr: [
-        ["vswr", "(vswr-1)/(vswr+1)", "-20*log10((vswr-1)/(vswr+1))"],
-        ["(1+s11)/(1-s11)", "s11", "-20*log10(s11)"],
-        ["(1+10^(-rl/20))/(1-10^(-rl/20))", "10^(-rl/20)", "rl"]
+        ["vswr", "(vswr-1)/(vswr+1)", "-20*log10((vswr-1)/(vswr+1))","100*((vswr-1)/(vswr+1))^2","100*(1-((vswr-1)/(vswr+1))^2)"],
+        ["(1+s11)/(1-s11)", "s11", "-20*log10(s11)","100*(s11)^2","100*(1-(s11)^2)"],
+        ["(1+10^(-rl/20))/(1-10^(-rl/20))", "10^(-rl/20)", "rl",,"100*(10^(-rl/20))^2","100*(1-(10^(-rl/20))^2)"],
+        ["(1+sqrt(pr/100))/(1-sqrt(pr/100))","sqrt(pr/100)","-20*log10(sqrt(pr/100))","pr","100-pr"],
+        ["(1+sqrt(1-pt/100))/(1-sqrt(1-pt/100))","sqrt(1-pt/100)","-20*log10(sqrt(1-pt/100))","100-pt","pt"],
       ]
     }
   },
