@@ -1,5 +1,26 @@
 var equations = [
   {
+    category: "propagation, antenna",
+    title: "Line-of-sight propagation and radio horizon of an antenna",
+    definition: "Assuming perfect sphere, line-of-sight distance calculated. Because the radio waves curved, correction factor included for radio horizon.",
+    formula: " \\begin{aligned} " +
+    "d_s &= 3.57\\sqrt{h} \\quad [km] \\\\" +
+    "d_r &= 4.12\\sqrt{h} \\quad [km] \\\\" +
+    "\\end{aligned} ",
+    args: [
+      { id: "h", sym: "h", def: "\\textit{Antenna height [m]}" },
+    ],
+    yields: [
+      { id: "ds", sym: "d_s", def: "\\textit{Line-of-sight distance [km]}", format: function (number) { return number.toFixed(1) } },
+      { id: "dr", sym: "d_r", def: "\\textit{Radio horizon [km]}", format: function (number) { return number.toFixed(1) } },
+    ],
+    calc: {
+      labelWidth: "65px",
+      vars: { h: 1500, LC: 15, GA: 12 },
+      expr: ["3.57*sqrt(h)","4.12*sqrt(h)"]
+    }
+  },
+  {
     category: "conversion",
     title: "VSWR, reflection coefficient, return  loss, reflected and transmitted power",
     formula: " \\begin{aligned} " +
@@ -18,13 +39,13 @@ var equations = [
     ],
     calc: {
       labelWidth: "65px",
-      vars: { vswr: 1.2, s11: 0.0909, rl: 20.828, pr:0.829, pt:99.173 },
+      vars: { vswr: 1.2, s11: 0.0909, rl: 20.828, pr: 0.829, pt: 99.173 },
       expr: [
-        ["vswr", "(vswr-1)/(vswr+1)", "-20*log10((vswr-1)/(vswr+1))","100*((vswr-1)/(vswr+1))^2","100*(1-((vswr-1)/(vswr+1))^2)"],
-        ["(1+s11)/(1-s11)", "s11", "-20*log10(s11)","100*(s11)^2","100*(1-(s11)^2)"],
-        ["(1+10^(-rl/20))/(1-10^(-rl/20))", "10^(-rl/20)", "rl",,"100*(10^(-rl/20))^2","100*(1-(10^(-rl/20))^2)"],
-        ["(1+sqrt(pr/100))/(1-sqrt(pr/100))","sqrt(pr/100)","-20*log10(sqrt(pr/100))","pr","100-pr"],
-        ["(1+sqrt(1-pt/100))/(1-sqrt(1-pt/100))","sqrt(1-pt/100)","-20*log10(sqrt(1-pt/100))","100-pt","pt"],
+        ["vswr", "(vswr-1)/(vswr+1)", "-20*log10((vswr-1)/(vswr+1))", "100*((vswr-1)/(vswr+1))^2", "100*(1-((vswr-1)/(vswr+1))^2)"],
+        ["(1+s11)/(1-s11)", "s11", "-20*log10(s11)", "100*(s11)^2", "100*(1-(s11)^2)"],
+        ["(1+10^(-rl/20))/(1-10^(-rl/20))", "10^(-rl/20)", "rl", , "100*(10^(-rl/20))^2", "100*(1-(10^(-rl/20))^2)"],
+        ["(1+sqrt(pr/100))/(1-sqrt(pr/100))", "sqrt(pr/100)", "-20*log10(sqrt(pr/100))", "pr", "100-pr"],
+        ["(1+sqrt(1-pt/100))/(1-sqrt(1-pt/100))", "sqrt(1-pt/100)", "-20*log10(sqrt(1-pt/100))", "100-pt", "pt"],
       ]
     }
   },
