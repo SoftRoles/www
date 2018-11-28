@@ -7,6 +7,7 @@ var equations = [
     "d_s &= 3.57\\sqrt{h} \\quad [km] \\\\" +
     "d_r &= 4.12\\sqrt{h} \\quad [km] \\\\" +
     "\\end{aligned} ",
+    ref: { name: "Wikipedia", url: "https://en.wikipedia.org/wiki/Line-of-sight_propagation" },
     args: [
       { id: "h", sym: "h", def: "\\textit{Antenna height [m]}" },
     ],
