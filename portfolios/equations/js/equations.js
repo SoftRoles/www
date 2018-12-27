@@ -71,7 +71,13 @@ var equations = [
   {
     category: "propagation, antenna",
     title: "Far field condition of the antenna/aperture",
-    formula: "R_{ff} = \\dfrac{2D^2}{\\lambda} = \\dfrac{2D^2f}{c_0} \\times 10^6",
+    formula: "\\begin{aligned} " +
+    "\\quad & \\textit{Maximum of :} & \\\\" +
+    "R_{ff} &= \\dfrac{2D^2}{\\lambda} = \\dfrac{2D^2f}{c_0} \\times 10^6  \\quad &  \\\\" +
+    "&= 5D \\quad & [m] \\\\" +
+    "&= 1.6\\lambda  = \\dfrac{1.6f}{c_0} \\times 10^6\\quad & \\\\" +
+    "\\end{aligned}",
+    ref: { name: "Warren L. Stutzman, Antenna Theory and Design, 3rd Ed., Page 43" },
     consts: [
       { id: "c0", sym: "c_0", def: "\\textit{Light speed [m \\negthickspace /\\negthickspace\\negthickspace\\negthickspace s]}" },
     ],
@@ -83,13 +89,13 @@ var equations = [
       { id: "f", sym: "f", def: "\\textit{Frequency [MHz]}" },
     ],
     yields: [
-      { id: "Rff", sym: "R_{ff}", def: "\\textit{Far field starting range [m]}", format: function (number) { return number.toFixed(3) } },
-      { id: "Rffkm", sym: "R_{ff}'", def: "\\textit{Far field starting range [km]}", format: function (number) { return number.toFixed(3) } },
+      { id: "Rff", sym: "R_{ff}", def: "\\textit{Far field starting range [m]}", format: function (number) { return number.toFixed(2) } },
+      { id: "Rffkm", sym: "R_{ff}'", def: "\\textit{Far field starting range [km]}", format: function (number) { return number.toFixed(2) } },
     ],
     calc: {
       labelWidth: "35px",
       vars: { c0: 299792458, f: 300, D: 1 },
-      expr: ["2*D^2*f*1E6/c0", "2*D^2*f*1E6/(c0*10^3)"]
+      expr: ["max(max(5*D,2*D^2*f*1E6/c0),1.6*c0/(f*1E6))", "max(max(5*D,2*D^2*f*1E6/c0),1.6*c0/(f*1E6))/(10^3)"]
     }
   },
   {
