@@ -158,4 +158,9 @@
 
   init();
 
+  $('figure').hover(
+    function () { $(this).addClass('details-open') },
+    function () { $(this).removeClass('details-open') }
+  )
+
 })();

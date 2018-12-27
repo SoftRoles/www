@@ -764,7 +764,7 @@ body {
 }
 
 .bookshelf figure.details-open {
-  z-index: 101;
+  /* z-index: 101; */
   -webkit-transition: none;
   transition: none;
 }
@@ -886,7 +886,7 @@ body {
 }
 
 .bookshelf figure.details-open::after {
-  height: 100%;
+  /* height: 100%; */
   opacity: 1;
   -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
