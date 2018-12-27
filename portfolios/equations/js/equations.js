@@ -72,14 +72,11 @@ var equations = [
     category: "propagation, antenna",
     title: "Far field condition of the antenna/aperture",
     formula: "\\begin{aligned} " +
-    "\\quad & \\textit{Maximum of :} & \\\\" +
-    "R_{ff} &= \\dfrac{2D^2}{\\lambda} = \\dfrac{2D^2f}{c_0} \\times 10^6  \\quad &  \\\\" +
-    "&= 5D \\quad & [m] \\\\" +
-    "&= 1.6\\lambda  = \\dfrac{1.6f}{c_0} \\times 10^6\\quad & \\\\" +
+    "R_{ff} &= Max\\left(\\dfrac{2D^2}{\\lambda},5D,1.6\\lambda\\right)  \\quad   \\\\" +
     "\\end{aligned}",
     ref: { name: "Warren L. Stutzman, Antenna Theory and Design, 3rd Ed., Page 43" },
     consts: [
-      { id: "c0", sym: "c_0", def: "\\textit{Light speed [m \\negthickspace /\\negthickspace\\negthickspace\\negthickspace s]}" },
+      // { id: "c0", sym: "c_0", def: "\\textit{Light speed [m \\negthickspace /\\negthickspace\\negthickspace\\negthickspace s]}" },
     ],
     iargs: [
       { id: "lambda", sym: "\\lambda", def: "\\textit{Free space wavelength [m]}" },
