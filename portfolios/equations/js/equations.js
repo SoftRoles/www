@@ -177,7 +177,7 @@ var equations = [
     category: "antenna",
     title: "Antenna gain for pencil beam antennas",
     definition: "Approximation of gain for $\\cos^n\\theta$ patterns",
-    formula: "G = \\dfrac{41.253}{\\Theta_1\\Theta_2}",
+    formula: "G = \\dfrac{41253}{\\Theta_1\\Theta_2}",
     ref: { name: "John D. Kraus, Antennas for All Applications, 3rd Ed., Page 24" },
     args: [
       { id: "theta1", sym: "\\Theta_1", def: "\\textit{Beam width in 1st principal plane [deg]}" },
