@@ -30,21 +30,36 @@ $$("chaptersTree").attachEvent("onKeyPress", function (code, e) {
 
 setTimeout(function () {
   $$("addItemChapterTree").show();
-}, 4000)
+}, 2000)
 
-function treeTableToJson(){
+var items = []
+function treeToJson() {
+  $$("chaptersTree").find({}).forEach(function (item) {
+    if (item.$parent === 0){
+      items.push({name:item.name, start:item.start, stop:item.stop, chapters:[]})
+    }
+    else{
+      var parent = items.find(function(parentItem){
+        return parentItem.name == $$("chaptersTree").getItem(item.$parent).name
+      })
+      parent.chapters.push({name:item.name, start:item.start, stop:item.stop})
+    }
+  });
+}
+
+function treeTableToJson() {
   var parentId = $$("chaptersTree").getFirstId()
-  while(parentId){
-    if($$("chaptersTree").getItem(parentId).$level==1){
+  while (parentId) {
+    if ($$("chaptersTree").getItem(parentId).$level == 1) {
       console.log($$("chaptersTree").getItem(parentId).name)
       childItem(parentId)
       parentId = $$("chaptersTree").getNextId(parentId)
     }
   }
 }
-function childItem(parentId){
+function childItem(parentId) {
   var childId = $$("chaptersTree").getFirstChildId(parentId)
-  while(childId){
+  while (childId) {
     console.log($$("chaptersTree").getItem(childId).name)
     childId = $$("chaptersTree").getNextId(childId)
   }

@@ -81,8 +81,8 @@ webix.ui({
         view: "treetable",
         columns: [
           { id: "name", header: "Chapter", editor: "text", fillspace: 1, template: "{common.treetable()} #name#" },
-          { id: "pageStart", header: "Start", width: 50, editor: "text" },
-          { id: "pageStop", header: "Stop", width: 50, editor: "text" },
+          { id: "start", header: "Start", width: 50, editor: "text" },
+          { id: "stop", header: "Stop", width: 50, editor: "text" },
         ],
         select: true,
         scrollX: false,
