@@ -46,21 +46,3 @@ function treeToJson() {
     }
   });
 }
-
-function treeTableToJson() {
-  var parentId = $$("chaptersTree").getFirstId()
-  while (parentId) {
-    if ($$("chaptersTree").getItem(parentId).$level == 1) {
-      console.log($$("chaptersTree").getItem(parentId).name)
-      childItem(parentId)
-      parentId = $$("chaptersTree").getNextId(parentId)
-    }
-  }
-}
-function childItem(parentId) {
-  var childId = $$("chaptersTree").getFirstChildId(parentId)
-  while (childId) {
-    console.log($$("chaptersTree").getItem(childId).name)
-    childId = $$("chaptersTree").getNextId(childId)
-  }
-}
