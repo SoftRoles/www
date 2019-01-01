@@ -39,6 +39,7 @@ $$("addItemProceed").attachEvent("onItemClick", function () {
         if (res && res.insertedId) {
           newItem.cover = res.insertedId
           newItem = Object.assign(newItem,$$("addItemDetails").getValues())
+          console.log(newItem)
           webix.ajax().headers({ "Content-type": "application/json" }).post("/mongodb/api/portfolios/books", newItem, function (t, d, x) {
             if (d.json().insertedId) {
               $$("addItemDetails").clear();
@@ -78,12 +79,14 @@ function treeTableToJSON(treeTableId) {
   var tree = []
   $$(treeTableId).find({}).forEach(function (item) {
     if (item.$parent === 0) {
+      delete item.$count; delete item.$level; delete item.$parent;
       tree.push(Object.assign({ children: [] }, item))
     }
     else {
       var parent = tree.find(function (parentItem) {
         return parentItem.name == $$(treeTableId).getItem(item.$parent).name
       })
+      delete item.$count; delete item.$level; delete item.$parent;
       parent.children.push(item)
     }
   });
@@ -96,6 +99,7 @@ $$("addItemChaptersWindowClose").attachEvent("onItemClick", function () {
 
 $$("addItemChaptersWindowSave").attachEvent("onItemClick", function () {
   newItem.chapters = treeTableToJSON("chaptersTree")
+  $$("addItemChaptersWindow").hide();
 })
 
 $$("addItemChaptersWindowClear").attachEvent("onItemClick", function () {

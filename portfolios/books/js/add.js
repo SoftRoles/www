@@ -51,7 +51,7 @@ webix.ui({
         cols: [
           {
             rows: [
-              { id: "coverImage", css: "text-center", template: '<img id="coverImage" class="text-center mw-100 mh-100 align-self-center" src="https://uppy.io/images/logos/uppy-dog-head-arrow.svg">' },
+              { id: "coverImage", css: "text-center", template: '<img id="coverImage" class="text-center mw-100 mh-100 align-self-center" src="http://bilgem.tubitak.gov.tr/sites/images/atam.jpg">' },
               {
                 id: "addItemCoverUpload",
                 view: "uploader",
