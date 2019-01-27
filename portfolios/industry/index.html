@@ -90,7 +90,7 @@
     let user = {}
 {
   let request = new XMLHttpRequest()
-  request.open("GET", "/user", true)
+  request.open("GET", "/authorization/api/v1/user", true)
   request.onload = function () {
     user = JSON.parse(request.responseText)
     if (!user.username) {
