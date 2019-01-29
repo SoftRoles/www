@@ -96,7 +96,7 @@
     if (!user.username) {
       user = { username: "guest" }
       let request = new XMLHttpRequest()
-      request.open("POST", "/login?source=portfolios/industry/index.html", true)
+      request.open("POST", "/authorization/api/v1/login?source=portfolios/industry/index.html", true)
       request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
       let json = { username: "guest", password: "guest" }
       request.send(JSON.stringify(json))
