@@ -281,14 +281,14 @@ button:focus {
   margin-left: auto;
 }
 
-.dropdown {
+.codrops-dropdown {
   font-weight: bold;
   margin-left: 5px;
   cursor: pointer;
   color: #81c483;
 }
 
-.dropdown::after {
+.codrops-dropdown::after {
   content: '\25BC';
   margin-left: 2px;
   font-size: 80%;
