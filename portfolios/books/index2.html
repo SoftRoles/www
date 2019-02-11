@@ -19,6 +19,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.5/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="js/index2_modernizr.custom.js"></script>
 
   <!-- Codrops -->
   <link rel="shortcut icon" href="../favicon.ico">
@@ -26,11 +27,47 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf" />
   <link rel="stylesheet" type="text/css" href="css/index2_style2.css" />
-  <script src="js/index2_modernizr.custom.js"></script>
-  
+
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/hline.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/normalize.css">
+
+  <style>
+    .meta__avatar {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+      border-radius: 5%;
+      max-width: 100%;
+    }
+
+    #theSidebar{
+      top: 62px;
+    }
+  </style>
+
 </head>
 
 <body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;">
+    <div class="navbar-brand"><a href="/">Anten IO</a> : <a href="/#portfolio">Portfolios</a>
+      : <a href="/portfolios/books/index.html">Books</a></div>
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedConten" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-0">
+        <li id="add" class="active" style="display: none;">
+          <a class="nav-link" onclick="openAddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container-fluid">
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
     <div id="theSidebar" class="sidebar">
