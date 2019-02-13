@@ -183,9 +183,10 @@
 			dummy.style.transform = 'translate3d(' + gridItem.offsetLeft + 'px, ' + gridItem.offsetTop + 'px, 0px) scale3d(' + gridItem.offsetWidth/gridItemsContainer.offsetWidth + ',' + gridItem.offsetHeight/getViewport('y') + ',1)';
 
 			onEndTransition(dummy, function() {
-				// reset content scroll..
-				contentItem.parentNode.scrollTop = 0;
-				gridItemsContainer.removeChild(dummy);
+        // reset content scroll..
+        contentItem.parentNode.scrollTop = 0;
+        $('.placeholder.placeholder--trans-out').remove()
+				// gridItemsContainer.removeChild(dummy);
 				classie.remove(gridItem, 'grid__item--loading');
 				classie.remove(gridItem, 'grid__item--animate');
 				lockScroll = false;
