@@ -1,9 +1,12 @@
 // enable for 'hsyn'
 webix.ready(function () {
-  webix.ajax().get("/user", function (t, d, x) {
+  var element = document.getElementById("add")
+  webix.ajax().get("/authorization/api/v1/user", function (t, d, x) {
     if (d.json() && d.json().username == "hsyn") {
-      var element = document.getElementById("add")
       element.setAttribute("style", element.getAttribute("style") + "display: block;")
+    }
+    else{
+      $('#add').hide()
     }
   })
 })
@@ -30,7 +33,7 @@ var addFormItems = [
       {
         id: "addItemFileUpload", view: "uploader", autosend: false, label: "Select file", graivty: 1, accept: "application/pdf",
         multiple: false,
-        upload: "/filesystem/api/files",
+        upload: "/filesystem/api/v1/files",
         formData: { folder: "portfolios/books" },
       },
     ], margin: 25
@@ -60,7 +63,7 @@ webix.ui({
                 accept: "image/png, image/gif, image/jpeg",
                 multiple: false,
                 autosend: false,
-                upload: "/filesystem/api/files",
+                upload: "/filesystem/api/v1/files",
                 formData: { folder: "portfolios/books/covers" },
               }],
             graivty: 1
