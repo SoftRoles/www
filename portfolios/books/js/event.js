@@ -105,7 +105,3 @@ $$("addItemChaptersWindowSave").attachEvent("onItemClick", function () {
 $$("addItemChaptersWindowClear").attachEvent("onItemClick", function () {
   $$("chaptersTree").clearAll();
 })
-setTimeout(function () {
-  $$("addItemWindow").show();
-  // $$("addItemChaptersWindow").show();
-}, 2000)
