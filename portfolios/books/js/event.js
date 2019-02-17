@@ -40,7 +40,7 @@ $$("addItemProceed").attachEvent("onItemClick", function () {
           newItem.cover = res.insertedId
           newItem = Object.assign(newItem,$$("addItemDetails").getValues())
           console.log(newItem)
-          webix.ajax().headers({ "Content-type": "application/json" }).post("/mongodb/api/portfolios/books", newItem, function (t, d, x) {
+          webix.ajax().headers({ "Content-type": "application/json" }).post("/database/api/v1/portfolios/books", newItem, function (t, d, x) {
             if (d.json().insertedId) {
               $$("addItemDetails").clear();
               $$("addItemWindow").hide();
