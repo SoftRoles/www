@@ -8,7 +8,7 @@
  * Copyright 2015, Codrops
  * http://www.codrops.com
  */
-(function() {
+function initGrid() {
 
 	var bodyEl = document.body,
 		docElem = window.document.documentElement,
@@ -209,4 +209,6 @@
 
 	init();
 
-})();
+};
+
+initGrid()
