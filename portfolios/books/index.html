@@ -9,7 +9,7 @@
   <title>Anten IO : Portfolios : Books</title>
 
   <!-- JQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
   <!-- Popper.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.5/umd/popper.min.js"></script>
@@ -42,6 +42,7 @@
   <!-- Local CDN -->
   <script src="/localcdn/analytics.js"></script>
   <script src="/localcdn/authorize.js"></script>
+  <script src="/localcdn/ready.js"></script>
 
   <style>
     .meta__avatar {
@@ -165,10 +166,6 @@
     </div>
   </div>
 
-  <script src="js/template0_classie.js"></script>
-  <script src="js/template0_main.js"></script>
-
-
   <!-- Footer -->
   <footer class="footer fixed-bottom w-100">
     <div class="container d-flex justify-content-between">
@@ -212,13 +209,18 @@
 
   <script src="js/add.js"></script>
   <script src="js/event.js"></script>
+  <script src="js/books.js"></script>
 
   <script>
     setTimeout(function () {
-      $$("addItemWindow").show();
+      // $$("addItemWindow").show();
       // $$("addItemChaptersWindow").show();
       // $('.modal').modal('show')
     }, 1000)
+
+    // $.get('/database/api/v1/portfolios/books', function(data){
+      // console.log(data)
+    // })
   </script>
 
 </body>
