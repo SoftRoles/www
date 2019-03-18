@@ -36,6 +36,45 @@ ready(function () {
       el_div1.append(el_div1_span1)
       el.append(el_div1)
       el.appendTo($(".grid"))
+
+      var el2 = document.createElement('article')
+      var el2_span0 = document.createElement('span')
+      var el2_h0 = document.createElement('h2')
+      var el2_div0 = document.createElement('div')
+      var el2_div0_img0 = document.createElement('img')
+      var el2_div0_span0 = document.createElement('span')
+      var el2_div0_span1 = document.createElement('span')
+      var el2_div0_span2 = document.createElement('span')
+      var el2_p0 = document.createElement('p')
+
+      el2.className = 'content__item'
+      el2_span0.className = 'category category--full'
+      el2_h0.className = 'title title--full'
+      el2_div0.className = 'meta meta--full'
+      el2_p0.className = ''
+      el2_div0_img0.className = 'meta__avatar'
+      el2_div0_span0.className = 'meta__author'
+      el2_div0_span1.className = 'meta__date'
+      el2_div0_span2.className = 'meta__reading-time'
+
+      el2_span0.innerText = book.author
+      el2_h0.innerText = book.title
+      el2_p0.innerText = book.description
+      el2_div0_img0.setAttribute('src','/filesystem/api/v1/files/' + book.cover)
+      el2_div0_span0.innerText = book.author
+      el2_div0_span1.innerText = 'Published in ' + book.year
+      el2_div0_span2.innerText = ordinalSuffix(book.edition) + ' Edition'
+
+      el2_div0.appendChild(el2_div0_img0)
+      el2_div0.appendChild(el2_div0_span0)
+      el2_div0.appendChild(el2_div0_span1)
+      el2_div0.appendChild(el2_div0_span2)
+      el2.appendChild(el2_span0)
+      el2.appendChild(el2_h0)
+      el2.appendChild(el2_div0)
+      el2.appendChild(el2_p0)
+      document.querySelector('.scroll-wrap').appendChild(el2)
+
     })
   })
 })
