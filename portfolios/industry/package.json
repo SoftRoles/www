@@ -1,20 +1,15 @@
 {
-  "name": "books",
+  "name": "industry",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "font-awesome": "^4.3.0",
-    "jquery": "^3.3.1",
     "jquery.waitforimages": "^2.4.0",
-    "popper.js": "^1.14.7",
     "semantic-ui-dimmer": "^2.4.0",
     "semantic-ui-loader": "^2.3.1"
   }

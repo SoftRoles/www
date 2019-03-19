@@ -11,12 +11,20 @@
   <!-- JQuery -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
+  <!-- JQuery:WaitForImages -->
+  <script src="node_modules/jquery.waitforimages/dist/jquery.waitforimages.min.js"></script>
+
   <!-- Popper.js -->
   <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- Semantic UI -->
+  <link rel="stylesheet" href="node_modules/semantic-ui-dimmer/dimmer.min.css">
+  <link rel="stylesheet" href="node_modules/semantic-ui-loader/loader.min.css">
+  <script src="node_modules/semantic-ui-dimmer/dimmer.min.js"></script>
 
   <!-- Webix -->
   <!--<link rel="stylesheet" href="http://cdn.webix.com/edge/skins/compact.css" type="text/css">-->
@@ -126,6 +134,11 @@
     </div>
   </div>
 
+  <!-- Loader -->
+  <div class="ui active dimmer">
+    <div class="ui massive text loader">Loading...</div>
+  </div>
+
   <!-- Space -->
   <div style='height: 250px;'></div>
 
@@ -185,6 +198,10 @@
     // $.get('/database/api/v1/portfolios/books', function(data){
       // console.log(data)
     // })
+    $(document).waitForImages(function(){
+      $(".ui.active.dimmer").removeClass("active")
+      console.log("Images loaded.")
+    })
   </script>
 
 </body>
