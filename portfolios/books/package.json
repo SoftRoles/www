@@ -16,6 +16,7 @@
     "jquery.waitforimages": "^2.4.0",
     "popper.js": "^1.14.7",
     "semantic-ui-dimmer": "^2.4.0",
+    "semantic-ui-list": "^2.4.0",
     "semantic-ui-loader": "^2.3.1"
   }
 }

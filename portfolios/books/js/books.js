@@ -73,7 +73,29 @@ ready(function () {
       el2.appendChild(el2_h0)
       el2.appendChild(el2_div0)
       el2.appendChild(el2_p0)
+
+      var el2_ul = document.createElement('ul')
+      el2_ul.className = 'ui list'
+      book.chapters.forEach(function(chapter){
+        if(chapter.level==1){
+          var el2_ul_li = document.createElement('li')
+          el2_ul_li.setAttribute('style', 'padding-top:0.5em;')
+          el2_ul_li.innerText = chapter.title
+          el2_ul.appendChild(el2_ul_li)
+        }
+        if(chapter.level==2){
+          var el2_ul_ul = document.createElement('ul')
+          el2_ul_ul.setAttribute('style', 'padding-top:0em;padding-bottom:0em;')
+          var el2_ul_ul_li = document.createElement('li')
+          el2_ul_ul_li.innerText = chapter.title
+          el2_ul_ul.appendChild(el2_ul_ul_li)
+          el2_ul.appendChild(el2_ul_ul)
+        }
+      })
+      el2.appendChild(el2_ul)
+
       document.querySelector('.scroll-wrap').appendChild(el2)
+      
 
     })
   })
