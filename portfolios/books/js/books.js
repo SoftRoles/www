@@ -20,7 +20,7 @@ ready(function () {
       var el = $("<a />", { class: 'grid__item', href: '#' });
       var el_h0 = $('<h2 />', { class: 'title title--preview', text: book.title })
       var el_div0 = $('<div />', { class: 'loader' })
-      var el_span0 = $('<span />', { class: 'category', text: book.author })
+      var el_span0 = $('<span />', { class: 'category', text: book.author + " @ " + book.publisher })
       var el_div1 = $('<div />', { class: 'meta meta--preview' })
       var el_div1_img0 = $('<img />', { class: 'meta__avatar', src: '/filesystem/api/v1/files/' + book.cover })
       var el_div1_span0 = $('<span />', { class: 'meta__date', text: 'Published in ' + book.year })
@@ -32,7 +32,6 @@ ready(function () {
       el.append(el_span0)
       el_div1.append(el_div1_img0)
       el_div1.append(el_div1_span0)
-      //el_div1_span1.append(el_div1_span1_i0)
       el_div1.append(el_div1_span1)
       el.append(el_div1)
       el.appendTo($(".grid"))
@@ -61,13 +60,13 @@ ready(function () {
       el2_div0_a0.className = 'meta__misc meta__misc--seperator'
       el2_div0_a1.className = 'meta__misc'
 
-      el2_span0.innerText = book.author
+      el2_span0.innerText = book.author + " @ " + book.publisher 
       el2_h0.innerText = book.title
       el2_p0.innerText = book.description
       el2_div0_img0.setAttribute('src','/filesystem/api/v1/files/' + book.cover)
       el2_div0_a0.setAttribute('href',book.publisherSite)
       el2_div0_a1.setAttribute('href',book.amazonSite)
-      el2_div0_span0.innerText = book.author
+      el2_div0_span0.innerText = book.author + " @ " + book.publisher 
       el2_div0_span1.innerText = 'Published in ' + book.year
       el2_div0_span2.innerText = ordinalSuffix(book.edition) + ' Edition'
       el2_div0_a0.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy from ' + book.publisher
