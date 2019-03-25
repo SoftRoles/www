@@ -1124,9 +1124,11 @@ body {
   }
 }
 @media screen and (max-width: 599px) {
-  .meta__misc,
   .article-nav {
     display: none;
+  }
+  .meta__misc {
+    text-align: center;
   }
 }
 

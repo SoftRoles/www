@@ -18,5 +18,8 @@
     "semantic-ui-dimmer": "^2.4.0",
     "semantic-ui-list": "^2.4.0",
     "semantic-ui-loader": "^2.3.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1"
   }
 }
