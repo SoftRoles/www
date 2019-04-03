@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="node_modules/semantic-ui-dimmer/dimmer.min.css">
   <link rel="stylesheet" href="node_modules/semantic-ui-loader/loader.min.css">
   <link rel="stylesheet" href="node_modules/semantic-ui-list/list.min.css">
+  <link rel="stylesheet" href="node_modules/semantic-ui-icon/icon.min.css">
+  <link rel="stylesheet" href="node_modules/semantic-ui-input/input.min.css">
   <script src="node_modules/semantic-ui-dimmer/dimmer.min.js"></script>
 
   <!-- Webix -->
@@ -94,41 +96,16 @@
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
     <div id="theSidebar" class="sidebar bg-white border border-light rounded">
       <button class="close-button fa fa-fw fa-close"></button>
-      <h1><span>Animated<span> Grid Layout</h1>
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Search...">
+        <i class="inverted circular search link icon"></i>
+      </div>
     </div>
     <div id="theGrid" class="main">
       <section class="grid">
-        <a class="grid__item" href="#">
-          <h2 class="title title--preview">Hope for Amy Walters</h2>
-          <div class="loader"></div>
-          <span class="category">Life &amp; Death</span>
-          <div class="meta meta--preview">
-            <img class="meta__avatar" src="img/template0_1.png" alt="author04" />
-            <span class="meta__date"><i class="fas fa-shopping-cart"></i> 6 Apr</span>
-            <span class="meta__reading-time"><i class="fab fa-amazon"></i> 2 min read</span>
-          </div>
-        </a>
       </section>
       <section class="content">
         <div class="scroll-wrap">
-          <article class="content__item">
-            <span class="category category--full">Life &amp; Death</span>
-            <h2 class="title title--full">A Book</h2>
-            <div class="meta meta--full">
-              <img class="meta__avatar" src="img/template0_1.png" alt="author04" />
-              <span class="meta__author">Sandra Paulson</span>
-              <span class="meta__date"><i class="fa fa-calendar-o"></i> 6 Apr</span>
-              <span class="meta__reading-time"><i class="fa fa-clock-o"></i> 2 min read</span>
-              <a href="http://antenio.com" class="meta__misc meta__misc--seperator"><i class="fas fa-shopping-cart"></i> Buy from Wiley - Publisher</a>
-              <a href="dee" class="meta__misc"><i class="fab fa-amazon"></i> Buy from Amazon - Reseller</a>
-              <nav class="article-nav">
-                <button><i class="fa fa-angle-left"></i> <span>Previous</span></button>
-                <button><span>Next</span> <i class="fa fa-angle-right"></i></button>
-              </nav>
-            </div>
-            <p>In contrast to this, our discussion readily shows that the double meaning in question belonged to the word taboo from the very beginning and that it serves to designate a definite ambivalence as well as everything which has come into existence on the basis of this ambivalence. </p>
-            <p>Excerpts from <a href="http://www.gutenberg.org/ebooks/41214">Totem and Taboo</a> by Sigmund Freud.</p>
-          </article>
         </div>
         <button class="close-button"><i class="fas fa-times fa-2x"></i><span>Close</span></button>
       </section>
@@ -189,7 +166,7 @@
   <script src="js/books.js"></script>
 
   <script>
-    setTimeout(function () {
+    setTimeout(function() {
       // $$("addItemWindow").show();
       // $$("addItemChaptersWindow").show();
       // $('.modal').modal('show')
@@ -197,9 +174,9 @@
     }, 5000)
 
     // $.get('/database/api/v1/portfolios/books', function(data){
-      // console.log(data)
+    // console.log(data)
     // })
-    $(document).waitForImages(function(){
+    $(document).waitForImages(function() {
       $(".ui.active.dimmer").removeClass("active")
       console.log("Images loaded.")
     })
