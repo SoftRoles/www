@@ -1,9 +1,16 @@
-setTimeout(() => {
+var request = new XMLHttpRequest() 
+request.open("GET", "/authorization/api/v1/user", true)
+request.onload = function () {               
+  user = JSON.parse(request.responseText)   
   if (user.username == "hsyn") {
     var element = document.getElementById("add")
     element.setAttribute("style", element.getAttribute("style") + "display: block;")
   }
-}, 1000)
+}                                          
+request.onerror = function() {            
+  console.log(request.status)            
+}                                       
+request.send()   
 
 webix.ready(function () {
   webix.ui({

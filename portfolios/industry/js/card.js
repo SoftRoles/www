@@ -4,7 +4,7 @@ ready(function() {
     el.removeChild(el.firstChild);
   }
 
-  setTimeout(function(){webix.ajax().get("/database/api/v1/favorites/links?portfolio=industry", function (t, d, x) {
+  webix.ajax().get("/database/api/v1/favorites/links?portfolio=industry", function (t, d, x) {
     var companies = d.json()
     companies.shuffle()
     for (var i = 0; i < companies.length; i++) {
@@ -35,5 +35,4 @@ ready(function() {
       el.appendChild(el_div0)
     }
   })
-                 }, 2000)
 })
