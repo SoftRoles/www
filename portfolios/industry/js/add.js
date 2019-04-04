@@ -82,7 +82,7 @@ webix.ready(function () {
                       var users = item.users
                       if (users.indexOf("guest") === -1) users.push("guest")
                       var update = { users: users, portfolio: "industry", logo: response.insertedId, title: $$("companyName").getValue() }
-                      webix.ajax().header({ "Content-type": "application/json" }).put("/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
+                      webix.ajax().headers({ "Content-type": "application/json" }).put("/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
                         if (d.json().nModified) {
                           $$("links").updateItem(item.id, Object.assign(item, update));
                         }
