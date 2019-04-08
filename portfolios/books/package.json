@@ -20,7 +20,9 @@
     "semantic-ui-icon": "^2.3.3",
     "semantic-ui-input": "^2.4.0",
     "semantic-ui-list": "^2.4.0",
-    "semantic-ui-loader": "^2.3.1"
+    "semantic-ui-loader": "^2.3.1",
+    "semantic-ui-modal": "^2.4.1",
+    "semantic-ui-transition": "^2.3.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1"
