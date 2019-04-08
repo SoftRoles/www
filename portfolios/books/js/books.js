@@ -111,14 +111,13 @@ function createBookCards(books){
 var allBooks = []
 ready(function () {
   $.get('/database/api/v1/portfolios/books', function (books) {
-    allBooks = books
-    var fuseOptions = { keys: ['title', 'chapters.title'], threshold: 0.1, distance: 1000 }
-    var fuse = new Fuse(allBooks, fuseOptions)
-    $(function(){
-      $('.ui input').keyup(function(e){
-        console.log(fuse.search($(e.target).val()))
-      })
-    })
     createBookCards(books)
+    // search and filter books
+    var fuseOptions = { keys: ['title', 'chapters.title'], threshold: 0.1, distance: 1000 }
+    var fuse = new Fuse(books, fuseOptions)
+    $('.ui input').keyup(function(e){
+      createBookCards(fuse.search($(e.target).val()))
+      console.log(fuse.search($(e.target).val()))
+    })
   })
 })
