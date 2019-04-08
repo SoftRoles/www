@@ -14,8 +14,9 @@ function ordinalSuffix(i) {
 }
 
 function createBookCards(books){
-  $('.grid').empty()
-  books.forEach(function (book) {
+  $('.grid__item').remove()
+  var sortedBooks = books.sort(function(b1,b2){ return b2.year - b1.year; })
+  sortedBooks.forEach(function (book) {
     var el = $("<a />", { class: 'grid__item', href: '#' });
     var el_h0 = $('<h2 />', { class: 'title title--preview', text: book.title })
     var el_div0 = $('<div />', { class: 'loader' })
@@ -116,8 +117,10 @@ ready(function () {
     var fuseOptions = { keys: ['title', 'chapters.title'], threshold: 0.1, distance: 1000 }
     var fuse = new Fuse(books, fuseOptions)
     $('.ui input').keyup(function(e){
-      createBookCards(fuse.search($(e.target).val()))
-      console.log(fuse.search($(e.target).val()))
+      if($(e.target).val()){
+        createBookCards(fuse.search($(e.target).val()))
+        console.log(fuse.search($(e.target).val()))
+      }
     })
   })
 })
