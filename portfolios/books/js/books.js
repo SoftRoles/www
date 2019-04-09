@@ -85,10 +85,12 @@ function createBookCards(books){
 
     var el2_ul = document.createElement('ul')
     el2_ul.className = 'ui list'
+    el2_ul.setAttribute('file', book.file)
     book.chapters.forEach(function(chapter){
       if(chapter.level==1){
         var el2_ul_li = document.createElement('li')
         el2_ul_li.setAttribute('style', 'padding-top:0.5em;')
+        el2_ul_li.setAttribute('page', chapter.page)
         el2_ul_li.innerText = chapter.title
         el2_ul.appendChild(el2_ul_li)
       }
@@ -96,6 +98,7 @@ function createBookCards(books){
         var el2_ul_ul = document.createElement('ul')
         el2_ul_ul.setAttribute('style', 'padding-top:0em;padding-bottom:0em;')
         var el2_ul_ul_li = document.createElement('li')
+        el2_ul_ul_li.setAttribute('page', chapter.page)
         el2_ul_ul_li.innerText = chapter.title
         el2_ul_ul.appendChild(el2_ul_ul_li)
         el2_ul.appendChild(el2_ul_ul)
@@ -119,7 +122,10 @@ ready(function () {
     $('.ui input').keyup(function(e){
       if($(e.target).val()){
         createBookCards(fuse.search($(e.target).val()))
-        console.log(fuse.search($(e.target).val()))
+        //console.log(fuse.search($(e.target).val()))
+      }
+      else{
+        createBookCards(books)
       }
     })
   })

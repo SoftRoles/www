@@ -36,6 +36,9 @@
   <!-- Fuse.js -->
   <script src="node_modules/fuse.js/dist/fuse.js"></script>
 
+  <!-- PDFObject -->
+  <script src="node_modules/pdfobject/pdfobject.min.js"></script>
+
   <!-- Webix -->
   <!--<link rel="stylesheet" href="http://cdn.webix.com/edge/skins/compact.css" type="text/css">-->
   <!--<script src="http://cdn.webix.com/edge/webix.js" type="text/javascript"></script>-->
@@ -76,6 +79,23 @@
     .meta.meta--full {
       top: 62px;
       z-index: 99;
+    }
+    
+    .modal-dialog {
+      height: 95%;
+      max-width: 95%;
+    }
+    .modal-dialog
+    .modal-content {
+      height: 100%;
+    }
+    .modal-body {
+      max-height: calc(100% - 60px);
+      /*overflow-y: scroll;*/
+    }
+
+    .content.content--show {
+      height: 90vh;
     }
   </style>
 </head>
@@ -119,7 +139,7 @@
       <section class="content">
         <div class="scroll-wrap">
         </div>
-        <button class="close-button"><i class="fas fa-times fa-2x"></i><span>Close</span></button>
+        <button class="close-button"><i class="fas fa-times fa-1x"></i><span>Close</span></button>
       </section>
     </div>
   </div>
@@ -129,29 +149,31 @@
     <div class="ui massive text loader">Loading...</div>
   </div>
 
-  <!-- Space -->
-  <div style='height: 250px;'></div>
-
   <!-- Footer -->
   <footer class="footer fixed-bottom w-100">
-    <div class="container d-flex justify-content-between">
+    <div class="container d-flex justify-content-center">
       <span class="text-muted">Beta Testing!</span>
-      <a id="feedback" data-toggle="modal" data-target=".modal">Feedback</a>
+      <!-- <a id="feedback" data-toggle="modal" data-target=".modal">Feedback</a> -->
     </div>
   </footer>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-center" role="document" style="max-width:100%;">
+  <div class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-center">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+          <!-- <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5> -->
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="row modal-body">
+          <div class="col-4 bookmarks">
+            Bookmarks
+          </div>
+          <div class="col-8 reader">
+            Reader
+          </div>
         </div>
       </div>
     </div>
@@ -163,16 +185,40 @@
   <!-- <script src="js/add.js"></script> -->
   <!-- <script src="js/event.js"></script> -->
   <script src="js/books.js"></script>
-  <script src="js/search.js"></script>
 
   <script>
     setTimeout(function() {
       // $$("addItemWindow").show();
       // $$("addItemChaptersWindow").show();
       // $('.modal').modal('show')
-      $('.modal').modal('show')
+      // $('.modal').modal('show')
       initGrid()
-    }, 5000)
+
+      $.get('/authorization/api/v1/user', function (user) {
+        if(user && user.username == 'hsyn'){
+          $('li').click(function(e){
+            $('.col-4.bookmarks').empty()
+            $(e.target).parents('ul.list').clone().appendTo('.col-4.bookmarks')
+            $('.col-4.bookmarks > .ui.list').css('font-size','10px')
+            $('.col-4.bookmarks > .ui.list').css('overflow-y','scroll')
+            $('.col-4.bookmarks').css('max-height', '100%')
+            $('.col-4.bookmarks > .ui.list').css('max-height', '100%')
+            $('.modal').modal('show')
+
+            var file = $('.bookmarks > .ui.list').attr('file')
+            PDFObject.embed('/filesystem/api/v1/files/'+file, '.reader')
+            
+            document.querySelectorAll('.bookmarks > .ui.list > li').forEach(function(el){
+              el.innerText += ' - p'+el.getAttribute('page')
+            })
+            document.querySelectorAll('.bookmarks > .ui.list > ul > li').forEach(function(el){
+              el.innerText += ' - p'+el.getAttribute('page')
+            })
+          })
+        }
+      })
+
+    }, 2000)
 
     // $.get('/database/api/v1/portfolios/books', function(data){
     // console.log(data)
@@ -181,6 +227,7 @@
       $(".ui.active.dimmer").removeClass("active")
       console.log("Images loaded.")
     })
+
   </script>
 
 </body>
