@@ -8,6 +8,18 @@
   <link rel="shortcut icon" type="image/png" href="../../img/favicon.png" />
   <title>Anten IO : Portfolios : Books</title>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126752612-1');
+  </script>
+
   <!-- JQuery -->
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
@@ -61,7 +73,6 @@
   <link rel="stylesheet" href="css/footer.css">
 
   <!-- Local CDN -->
-  <script src="js/analytics.js"></script>
   <script src="js/ready.js"></script>
 
   <style>
@@ -80,15 +91,16 @@
       top: 62px;
       z-index: 99;
     }
-    
+
     .modal-dialog {
       height: 95%;
       max-width: 95%;
     }
-    .modal-dialog
-    .modal-content {
+
+    .modal-dialog .modal-content {
       height: 100%;
     }
+
     .modal-body {
       max-height: calc(100% - 60px);
       /*overflow-y: scroll;*/
@@ -194,25 +206,25 @@
       // $('.modal').modal('show')
       initGrid()
 
-      $.get('/authorization/api/v1/user', function (user) {
-        if(user && user.username == 'hsyn'){
-          $('li').click(function(e){
+      $.get('/authorization/api/v1/user', function(user) {
+        if (user && user.username == 'hsyn') {
+          $('li').click(function(e) {
             $('.col-4.bookmarks').empty()
             $(e.target).parents('ul.list').clone().appendTo('.col-4.bookmarks')
-            $('.col-4.bookmarks > .ui.list').css('font-size','10px')
-            $('.col-4.bookmarks > .ui.list').css('overflow-y','scroll')
+            $('.col-4.bookmarks > .ui.list').css('font-size', '10px')
+            $('.col-4.bookmarks > .ui.list').css('overflow-y', 'scroll')
             $('.col-4.bookmarks').css('max-height', '100%')
             $('.col-4.bookmarks > .ui.list').css('max-height', '100%')
             $('.modal').modal('show')
 
             var file = $('.bookmarks > .ui.list').attr('file')
-            PDFObject.embed('/filesystem/api/v1/files/'+file, '.reader')
-            
-            document.querySelectorAll('.bookmarks > .ui.list > li').forEach(function(el){
-              el.innerText += ' - p'+el.getAttribute('page')
+            PDFObject.embed('/filesystem/api/v1/files/' + file, '.reader')
+
+            document.querySelectorAll('.bookmarks > .ui.list > li').forEach(function(el) {
+              el.innerText += ' - p' + el.getAttribute('page')
             })
-            document.querySelectorAll('.bookmarks > .ui.list > ul > li').forEach(function(el){
-              el.innerText += ' - p'+el.getAttribute('page')
+            document.querySelectorAll('.bookmarks > .ui.list > ul > li').forEach(function(el) {
+              el.innerText += ' - p' + el.getAttribute('page')
             })
           })
         }
@@ -227,7 +239,6 @@
       $(".ui.active.dimmer").removeClass("active")
       console.log("Images loaded.")
     })
-
   </script>
 
 </body>

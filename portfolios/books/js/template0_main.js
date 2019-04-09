@@ -153,7 +153,7 @@ function initGrid() {
 			classie.add(dummy, 'placeholder--trans-out');
 			// position the content container
 			// contentItemsContainer.style.top = scrollY() + 'px';
-			contentItemsContainer.style.top = '-8px';
+			contentItemsContainer.style.top = (scrollY()-9) + 'px';
 			// show the main content container
 			classie.add(contentItemsContainer, 'content--show');
 			// show content item:
