@@ -64,12 +64,14 @@ function createBookCards(books){
     el2_h0.innerText = book.title
     el2_p0.innerText = book.description
     el2_div0_img0.setAttribute('src','/filesystem/api/v1/files/' + book.cover)
-    el2_div0_a0.setAttribute('href',book.publisherSite)
-    el2_div0_a1.setAttribute('href',book.amazonSite)
     el2_div0_span0.innerText = book.author + " @ " + book.publisher 
     el2_div0_span1.innerText = 'Published in ' + book.year
     el2_div0_span2.innerText = ordinalSuffix(book.edition) + ' Edition'
-    el2_div0_a0.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy from ' + book.publisher
+    el2_div0_a0.setAttribute('href',book.publisherSite)
+    el2_div0_a0.setAttribute('target','__blank')
+    el2_div0_a0.innerHTML = '<i class="fas fa-globe"></i> Visit publisher ' + book.publisher
+    el2_div0_a1.setAttribute('href',book.amazonSite)
+    el2_div0_a1.setAttribute('target','__blank')
     el2_div0_a1.innerHTML = '<i class="fab fa-amazon"></i> Buy from Amazon'
 
     el2_div0.appendChild(el2_div0_img0)
