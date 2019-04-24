@@ -27,6 +27,7 @@ function ordinalSuffix(i) {
 
 function createBookCards(books) {
   $('.grid__item').remove()
+  $('.content__item').remove()
   var sortedBooks = books.sort(function(b1, b2) {
     return b2.year - b1.year;
   })
