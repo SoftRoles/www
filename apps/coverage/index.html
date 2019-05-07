@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" type="image/png" href="../../img/favicon.png" />
+  <title>Anten IO : Apss : Coverage Map</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126752612-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126752612-1');
+  </script>
+
+  <!-- JQuery -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!-- Custom -->
+  <link rel="stylesheet" href="css/navbar.css">
+
+  <!-- Mapbox -->
+  <script src="node_modules/mapbox-gl/dist/mapbox-gl.js"></script>
+  <link href='node_modules/mapbox-gl/dist/mapbox-gl.css' rel='stylesheet' />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body class="bg-white">
+  <!-- Navbar -->
+  <nav class="navbar navbar-inverse navbar-expand-sm fixed-top" style="background-color: #212529;">
+    <div class="navbar-brand"><a href="/"></a> : <a href="/#apps"></a>
+      : <a href="/apps/coverage/index.html"></a></div>
+    <!-- <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedConten" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mr-0">
+        <li id="add" class="active" style="display: none;">
+          <a class="nav-link" onclick="openAddItemWin()" style="background: #212529; color: rgba(255, 255, 255, 1.0)">Add</a>
+        </li>
+      </ul>
+    </div> -->
+  </nav>
+
+  <!-- Container -->
+  <div id="map"></div>
+  <div class="container-fluid">
+  </div>
+
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaHN5biIsImEiOiJjaXpmZHVxNGIwMDBlMnFvM3hpenZ3ZmhxIn0.VIrTwIeSR9zt7oSp5ayr4A';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [29, 40],
+      zoom: 6
+    });
+    setTimeout(function() {}, 2000)
+  </script>
+
+</body>
+
+</html>
