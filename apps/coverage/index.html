@@ -42,9 +42,11 @@
   <link href='node_modules/semantic-ui-form/form.min.css' rel='stylesheet' />
   <link href='node_modules/semantic-ui-segment/segment.min.css' rel='stylesheet' />
   <link href='node_modules/semantic-ui-dropdown/dropdown.min.css' rel='stylesheet' />
+  <link href='node_modules/semantic-ui-accordion/accordion.min.css' rel='stylesheet' />
   <script src="node_modules/semantic-ui-transition/transition.min.js"></script>
   <script src="node_modules/semantic-ui-form/form.min.js"></script>
   <script src="node_modules/semantic-ui-dropdown/dropdown.min.js"></script>
+  <script src="node_modules/semantic-ui-accordion/accordion.min.js"></script>
 
   <style>
     body {
@@ -90,14 +92,32 @@
     <button id="settings-open" class="circular ui black icon button mt-2">
       <i class="icon large settings"></i>
     </button>
-    <div class="ui inverted segment">
+    <div class="ui inverted segment" style="width:250px; display:none;">
       <div class="ui inverted mini form">
-        <div class="field">
-          <label>Propagation model</label>
-          <select class="ui search dropdown">
-            <option value="">Select..</option>
-          </select>
-          <input placeholder="Test" type="text">
+        <div class="row justify-content-center">
+          <i id="settings-close" class="icon big settings float-center mb-2"></i>
+        </div>
+        <div class="ui inverted accordion field">
+          <div class="title">
+            <i class="icon dropdown"></i>
+            Propagation
+          </div>
+          <div class="content field">
+            <label class="transition hidden">Frequency</label>
+            <input class="transition hidden" placeholder="in MHz" type="number">
+            <label class="transition hidden">Model</label>
+            <select class="ui selection dropdown transition hidden">
+             <option value="0">Free space</option>
+             <option value="1">Free space wtih ground</option>
+              <!-- <input type="hidden" name="gender">
+              <i class="dropdown icon"></i>
+              <div class="default text">Select model...</div>
+              <div class="menu">
+                <div class="item" data-value="0">Free space</div>
+                <div class="item" data-value="1">Free space with ground</div>
+              </div> -->
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -106,17 +126,27 @@
 
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiaHN5biIsImEiOiJjaXpmZHVxNGIwMDBlMnFvM3hpenZ3ZmhxIn0.VIrTwIeSR9zt7oSp5ayr4A';
-    var map = new mapboxgl.Map({
+    /* var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [29, 40],
       zoom: 6
-    });
+    });*/
     setTimeout(function() {}, 2000)
-    $('#settings-open').click(function(e){
-      $(this).transition('scale')
+    $('#settings-open').click(function(e) {
+      $(this).transition({animation:'scale out', duration:500})
+      //$('#settings-open').hide()
+    setTimeout(function() {$('.ui.inverted.segment').fadeIn()}, 500)
+      //$('.ui.inverted.segment').fadeIn()
+    })
+    $('#settings-close').click(function(e) {
+      $('.ui.inverted.segment').fadeOut()
+      //$('#settings-open').fadeIn()
+      $('#settings-open').transition({animation:'scale in', duration:1000})
     })
 
+    $('.ui.accordion').accordion()
+    $('.ui.dropdown').dropdown()
   </script>
 
 </body>
