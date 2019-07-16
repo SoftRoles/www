@@ -66,7 +66,18 @@
       position: absolute;
       z-index: 1;
       top: 50px;
+      width: auto;
     }
+
+    #tr-pos-set-ui {
+      position: absolute;
+      z-index: 1;
+      top: 60px;
+      left: calc(50% - 125px);
+      width: 250px;
+      display: none;
+    }
+
   </style>
 </head>
 
@@ -93,8 +104,8 @@
     <button id="settings-open" class="circular ui black icon button mt-2">
       <i class="icon large settings"></i>
     </button>
-    <div class="ui inverted segment" style="width:250px; display:none;">
-      <div class="ui inverted mini form">
+    <div id="settings" class="ui inverted segment" style="width:250px; display:none;">
+      <div class="ui fluid inverted mini form">
         <div class="row justify-content-left mb-2">
           <i id="settings-close" class="icon big chevron left"></i>
           <h5>Configuration</h5>
@@ -125,7 +136,20 @@
           <div class="content">
             <div class="transition hidden field">
               <label class="">Position</label>
-              <input class="" placeholder="in MHz" type="number">
+                <input id="tr-pos" type="text" readonly="" placeholder="lat,lon">
+                <div id="tr-pos-set" class="mt-1 ui fluid mini inverted basic button">
+                  Set
+                </div>
+              <!-- <div class="two fields">
+                <div class="eleven wide field">
+                    <input type="text" readonly="" placeholder="lat,lon">
+                </div>
+                <div class="four wide field">
+                  <div id="tr-pos-set" class="ui mini inverted basic button">
+                    Set
+                  </div>
+                </div>
+              </div> -->
               <label class="hidden mt-1">Pattern</label>
               <select class="ui selection dropdown">
                 <option value="0">Isotropic</option>
@@ -140,7 +164,21 @@
   </div>
 
 
+  <div id="tr-pos-set-ui" class="container-fluid">
+    <div class="ui inverted segment" style="padding: 3px;">
+      <div class="ui fluid inverted mini form">
+        <input id="tr-pos-set-input" type="text" placeholder="lat,lon">
+        <div id="tr-pos-set-okay" class="ui fluid mini inverted basic button">Okay</div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    var lastFocused = ""
+
+    function setFocused(id) {
+      lastFocused = id;
+    }
     mapboxgl.accessToken = 'pk.eyJ1IjoiaHN5biIsImEiOiJjaXpmZHVxNGIwMDBlMnFvM3hpenZ3ZmhxIn0.VIrTwIeSR9zt7oSp5ayr4A';
     var map = new mapboxgl.Map({
       container: 'map',
@@ -148,6 +186,18 @@
       center: [29, 40],
       zoom: 6
     });
+
+    map.on("load", function() {
+      map.on("click", function(e) {
+        if (lastFocused == "tr-pos-set-ui") {
+          $("#tr-pos-set-input").val("" + e.lngLat.lat + ", " + e.lngLat.lng)
+          //console.log(e.lngLat.lng)
+          //console.log(e.lngLat.lat)
+          //lastFocused = ""
+        }
+      })
+    })
+
     setTimeout(function() {}, 2000)
     $('#settings-open').click(function(e) {
       $(this).transition({
@@ -155,19 +205,48 @@
         duration: 500
       })
       setTimeout(function() {
-        $('.ui.inverted.segment').transition({
+        $("#settings").transition({
           animation: 'fade right in',
           duration: 500
         })
       }, 500)
     })
     $('#settings-close').click(function(e) {
-      $('.ui.inverted.segment').transition({
+      $("#settings").transition({
         animation: 'fade left out',
         duration: 500
       })
       setTimeout(function() {
         $('#settings-open').transition({
+          animation: 'fade right in',
+          duration: 500
+        })
+      }, 500)
+    })
+
+    $("#tr-pos-set").click(function(e) {
+      setFocused("tr-pos-set-ui")
+      $("#settings").transition({
+        animation: 'fade left out',
+        duration: 500
+      })
+      setTimeout(function() {
+        $('#tr-pos-set-ui').transition({
+          animation: 'fade right in',
+          duration: 500
+        })
+      }, 500)
+    })
+
+    $("#tr-pos-set-okay").click(function(e) {
+      $("#tr-pos").val($("#tr-pos-set-input").val())
+      setFocused("")
+      $("#tr-pos-set-ui").transition({
+        animation: 'fade left out',
+        duration: 500
+      })
+      setTimeout(function() {
+        $('#settings').transition({
           animation: 'fade right in',
           duration: 500
         })
