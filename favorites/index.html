@@ -17,12 +17,12 @@
   </style>
 
   <script type="text/javascript" charset="utf-8">
-    webix.ajax().get("/authorization/api/v1/user", function (t, d, x) {
+    /*webix.ajax().get("/authorization/api/v1/user", function (t, d, x) {
       if (d.json().username) { }
       else {
         window.location("/login?source=favorites")
       }
-    })
+    })*/
 
     var addedItems = []
     //named css
@@ -48,7 +48,7 @@
     function linkClick() {
       var item = $$("links").getSelectedItem()
       var update = { lastvisit: date_string() }
-      webix.ajax().headers({ "Content-type": "application/json" }).put("/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
+      webix.ajax().headers({ "Content-type": "application/json" }).put("/old/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
         console.log(d.json())
         if (d.json().nModified) {
           $$("links").updateItem(item.id, Object.assign(item, update));
@@ -68,7 +68,7 @@
         lastvisit: date_string()
       }
 
-      webix.ajax().headers({ "Content-type": "application/json" }).post("/database/api/v1/favorites/links", item, function (t, d, x) {
+      webix.ajax().headers({ "Content-type": "application/json" }).post("/old/database/api/v1/favorites/links", item, function (t, d, x) {
         if (d.json().n) {
           item._id = d.json().insertedId
           var id = $$("links").add(item);
@@ -82,7 +82,7 @@
           console.log(d.json())
           webix.ajax().get("/webscrap/api/v1/title?url=" + item.url, function (t, d, x) {
             var update = { title: d.json().title.trim(), meta: d.json().meta }
-            webix.ajax().headers({ "Content-type": "application/json" }).put("/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
+            webix.ajax().headers({ "Content-type": "application/json" }).put("/old/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
               console.log(d.json())
               if (d.json().nModified) {
                 $$("links").updateItem(item.id, Object.assign(item, update));
@@ -96,7 +96,7 @@
     function delete_row() {
       setTimeout(function () {
         var item = $$("links").getSelectedItem()
-        webix.ajax().del("/database/api/v1/favorites/links/" + item._id, function (t, d, x) {
+        webix.ajax().del("/old/database/api/v1/favorites/links/" + item._id, function (t, d, x) {
           console.log(d.json())
           if (d.json().n) {
             $$("links").remove(item.id);
@@ -128,7 +128,7 @@
 
       var grid = {
         id: "links",
-        url: "/database/api/v1/favorites/links",
+        url: "/old/database/api/v1/favorites/links",
         view: "datatable", select: "row",
         columns: [
           { id: "favicon", header: "", width: 50, template: iconTemplate },
@@ -149,7 +149,7 @@
           "onAfterEditStop": function (state, editor) {
             var item = this.getSelectedItem()
             var update = { [editor.column]: state.value }
-            webix.ajax().headers({ "Content-type": "application/json" }).put("/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
+            webix.ajax().headers({ "Content-type": "application/json" }).put("/old/database/api/v1/favorites/links/" + item._id, update, function (t, d, x) {
               console.log(d.json())
               if (d.json().nModified) {
                 $$("links").updateItem(item.id, Object.assign(item, update));
