@@ -206,7 +206,7 @@
       // $('.modal').modal('show')
       initGrid()
 
-      $.get('/authorization/api/v1/user', function(user) {
+      $.get('/old/database/api/v1', function(user) {
         if (user && user.username == 'hsyn') {
           $('li').click(function(e) {
             $('.col-4.bookmarks').empty()

@@ -4,7 +4,7 @@ ready(function() {
     el.removeChild(el.firstChild);
   }
 
-  webix.ajax().get("/database/api/v1/favorites/links?portfolio=industry", function (t, d, x) {
+  webix.ajax().get("/old/database/api/v1/favorites/links?portfolio=industry", function (t, d, x) {
     var companies = d.json()
     companies.shuffle()
     for (var i = 0; i < companies.length; i++) {
@@ -20,7 +20,7 @@ ready(function() {
       el_div0_a0_img0.className = "card-img-top"
       el_div0.className = "card filter " + companies[i].category.replaceAll(",", "")
 
-      el_div0_a0_img0.setAttribute("src", "/filesystem/api/v1/files/" + companies[i].logo)
+      el_div0_a0_img0.setAttribute("src", "/old/filesystem/api/v1/files/" + companies[i].logo)
       el_div0_a0_img0.setAttribute("alt", companies[i].title)
       el_div0_a0.setAttribute("href", companies[i].url)
       el_div0_a0.setAttribute("target", "_blank")

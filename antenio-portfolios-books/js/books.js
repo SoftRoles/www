@@ -26,7 +26,7 @@ function ordinalSuffix(i) {
 }
 
 function createBookCards(books) {
-  $.get('/authorization/api/v1/user', function(user) {
+  $.get('/old/database/api/v1', function(user) {
     $('.grid__item').remove()
     $('.content__item').remove()
     var sortedBooks = books.sort(function(b1, b2) {
@@ -53,7 +53,7 @@ function createBookCards(books) {
       })
       var el_div1_img0 = $('<img />', {
         class: 'meta__avatar',
-        src: '/filesystem/api/v1/files/' + book.cover
+        src: '/old/filesystem/api/v1/files/' + book.cover
       })
       var el_div1_span0 = $('<span />', {
         class: 'meta__date',
@@ -103,7 +103,7 @@ function createBookCards(books) {
       el2_span0.innerText = book.author + " @ " + book.publisher
       el2_h0.innerText = book.title
       el2_p0.innerText = book.description
-      el2_div0_img0.setAttribute('src', '/filesystem/api/v1/files/' + book.cover)
+      el2_div0_img0.setAttribute('src', '/old/filesystem/api/v1/files/' + book.cover)
       el2_div0_span0.innerText = book.author + " @ " + book.publisher
       el2_div0_span1.innerText = 'Published in ' + book.year
       el2_div0_span2.innerText = ordinalSuffix(book.edition) + ' Edition'
@@ -157,7 +157,7 @@ function createBookCards(books) {
 
 var allBooks = []
 ready(function() {
-  $.get('/database/api/v1/portfolios/books', function(books) {
+  $.get('/old/database/api/v1/portfolios/books', function(books) {
     createBookCards(books)
     // search and filter books
     var fuseOptions = {

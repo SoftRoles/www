@@ -31,7 +31,7 @@ webix.ready(function () {
       rows: [
         {
           id: "links",
-          url: "/database/api/v1/favorites/links?class=Industry",
+          url: "/old/database/api/v1/favorites/links?class=Industry",
           view: "datatable", select: "row",
           columns: [
             { id: "portfolio", header: "", template: mark_portfolio, fillspace: 1 },
